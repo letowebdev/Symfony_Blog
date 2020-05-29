@@ -2,18 +2,18 @@
 
 {% block customstylesheets %}<link href="{{asset('assets/css/bootstrap.min.css')}}" rel="stylesheet">{% endblock %}
 
-{% block title %}Awesome videos - admin panel{% endblock %}
+{% block title %}Leto's blog - admin panel{% endblock %}
 
 {% block menu %}{% endblock %}
 
 {% block main %}
 <div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-dark border-bottom shadow-sm">
         <h5 class="my-0 mr-md-auto font-weight-normal">Leto Blog</h5>
-        <a class="nav-link active" href="../"> Go to public site</a>      
+        <a class="nav-link active" href="{{path('main_page')}}"> Go to public site</a>      
         <nav class="my-2 my-md-0 mr-md-3">
-            <a class="p-2 text-dark">Logged as John Smith</a>
+            <a class="p-2 text-info">Logged as John Smith</a>
         </nav>
-        <a class="btn btn-outline-primary" href="#">Logout</a>
+        <button class="btn btn-secondary" href="#">Logout</button>
     </div>
 
         <div class="row">
@@ -63,12 +63,7 @@
             </main>
             </div>
 {% endblock %}
- {% block javascripts %}
-<script>
-    $('input[type="file"]').change(function (e) {
-        var fileName = e.target.files[0].name;
-        console.log(e.target.files[0]);
-        $('.custom-file-label').html(fileName);
-    });
-</script>
+
+{% block javascripts %}
+ <script src="{{asset('assets/js/style.js')}}"></script>
 {% endblock %}
