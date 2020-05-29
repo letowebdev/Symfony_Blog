@@ -4,9 +4,11 @@ namespace App\Entity;
 
 use App\Repository\PostRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\ORM\Mapping\Index as index;
 
 /**
  * @ORM\Entity(repositoryClass=PostRepository::class)
+ * @ORM\Table(name="posts", indexes={@Index(name="title_idx", columns={"title"})})
  */
 class Post
 {
