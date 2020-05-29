@@ -38,3 +38,14 @@
         console.log(e.target.files[0]);
         $('.custom-file-label').html(fileName);
     });
+
+    function delete_video(e,video_id)
+    {
+        e.preventDefault();
+        if(confirm('Are you sure?')) 
+        {
+            console.log(id);
+            // delete post
+            // window.location.href = 'clear database record with Symfony';
+        }
+    }
