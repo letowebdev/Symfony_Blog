@@ -37,8 +37,9 @@
   </div>
 </nav>
       {% endblock %}
-
+        <div class="container">
         {% block main %}{% endblock %}
+        </div>
         {% block javascripts %}
         {% endblock %}
         <script src="{{asset('assets/js/jquery.js')}}"></script>
