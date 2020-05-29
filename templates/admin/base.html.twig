@@ -1,63 +1,64 @@
 {% extends 'base.html.twig' %}
 
-{% block customstylesheets %}<link href="{{asset('assets/css/bootstrap.min.css')}}" rel="stylesheet">{% endblock %}
-
 {% block title %}Leto's blog - admin panel{% endblock %}
 
 {% block menu %}{% endblock %}
 
 {% block main %}
-<div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-dark border-bottom shadow-sm">
-        <h5 class="my-0 mr-md-auto font-weight-normal">Leto Blog</h5>
-        <a class="nav-link active" href="{{path('main_page')}}"> Go to public site</a>      
-        <nav class="my-2 my-md-0 mr-md-3">
-            <a class="p-2 text-info">Logged as John Smith</a>
-        </nav>
-        <button class="btn btn-secondary" href="#">Logout</button>
-    </div>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+  <a class="navbar-brand" href="{{path('main_page')}}">Leto's Blog</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
 
-        <div class="row">
-            <nav class="col-md-2 d-none d-md-block bg-dark sidebar">
-                <div class="sidebar-sticky">
-                    <ul class="nav flex-column">
-                        <li class="nav-item">
-                            <a class="nav-link" href="my_profile.php">
-                                <span data-feather="file"></span>
-                                My profile
-                            </a>
+  <div class="collapse navbar-collapse" id="navbarColor01">
+    <ul class="navbar-nav mr-auto contai">
+      <li class="nav-item active">
+        <a class="nav-link" href="{{path('main_page')}}">Go to public site <span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="{{path('post_list')}}">Logged as John Smith</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="{{path('register')}}">Logout</a>
+      </li>
+    </ul>
+  </div>
+</nav>
+
+<div class="row">
+            <nav class="col-md-2 d-none d-md-block card">
+                <div class="card-body p-4">
+
+                    <ul class="navbar-nav mr-auto">
+                        <li class="nav-item active">
+                            <a class="nav-link" href="{{path('admin_main_page')}}"> My profile</a>
                         </li>
+                        <hr>
                         <li class="nav-item">
-                            <a class="nav-link" href="categories.php">
-                                <span data-feather="file"></span>
-                                Categories
-                            </a>
+                            <a class="nav-link" href="{{path('categories')}}">Categories</a>
                         </li>
+                        <hr>
                         <li class="nav-item">
-                            <a class="nav-link" href="videos.php">
-                                <span data-feather="shopping-cart"></span>
-                                Posts
-                            </a>
+                            <a class="nav-link"  href="{{path('posts')}}">Posts</a>
                         </li>
+                        <hr>
                         <li class="nav-item">
-                            <a class="nav-link" href="upload_video.php">
-                                <span data-feather="shopping-cart"></span>
-                                Upload a post
-                            </a>
+                            <a class="nav-link" href="{{path('upload_post')}}">Upload a post</a>
                         </li>
+                        <hr>
                         <li class="nav-item">
-                            <a class="nav-link" href="users.php">
-                                <span data-feather="users"></span>
-                                Users
-                            </a>
+                            <a class="nav-link" href="{{path('users')}}">Users</a>
                         </li>
                     </ul>
-                    
+
                 </div>
+
             </nav>
 
             <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
                 <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-                    <h1 class="h2"><a href="my_profile.php">Dashboard</a></h1>
+                    <h1 class="h2"><a href="{{path('admin_main_page')}}">Dashboard</a></h1>
                 </div>
                 {% block mainadmin %}{% endblock %}
             </main>
