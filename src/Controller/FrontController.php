@@ -38,6 +38,17 @@ class FrontController extends AbstractController
     }
 
 
+    /**
+     * @Route("/search-results", methods={"POST"}, name="search_results")
+     */
+    public function searchResults()
+    {
+        return $this->render('front/search_results.html.twig', [
+            'controller_name' => 'FrontController',
+        ]);
+    }
+
+
 
 
 
