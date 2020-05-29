@@ -2,13 +2,14 @@
 <html>
     <head>
         <meta charset="UTF-8">
-        <title>{% block title %}Welcome!{% endblock %}</title>
+        <title>{% block title %}Leto Blog!{% endblock %}</title>
         <link rel="stylesheet" href="{{asset('assets/css/bootstrap.min.css')}}">
         <link rel="stylesheet" href="{{asset('assets/css/fontawesome.min.css')}}">
         {% block stylesheets %}{% endblock %}
     </head>
     <body>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+      {% block menu %}
+            <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
   <a class="navbar-brand" href="#">Leto's Blog</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
@@ -35,6 +36,8 @@
     </form>
   </div>
 </nav>
+      {% endblock %}
+
         {% block main %}{% endblock %}
         {% block javascripts %}
         {% endblock %}
