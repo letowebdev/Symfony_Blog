@@ -48,6 +48,15 @@ class FrontController extends AbstractController
         ]);
     }
 
+    /**
+     * @Route("/register", name="register")
+     */
+    public function register()
+    {
+        return $this->render('front/register.html.twig', [
+            'controller_name' => 'FrontController',
+        ]);
+    }
 
 
 
