@@ -2,8 +2,9 @@
 
 namespace App\Controller;
 
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use App\Entity\Category;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class FrontController extends AbstractController
 {
@@ -65,6 +66,15 @@ class FrontController extends AbstractController
     }
 
 
+    public function mainCategories()
+    {
+        $categories = $this->getDoctrine()
+        ->getRepository(Category::class)
+        ->findBy(['parent'=>null], ['name' => 'ASC']);
+        return $this->render('front/_main_categories.html.twig', [
+            'categories' => $categories
+        ]);
+    }
 
 
 
