@@ -1,10 +1,11 @@
 
 
-<select class="custom-select">
+<select class="custom-select" onchange="location = this.value;">
 	<option selected="">Choose a Category</option>
 {% for category in categories %}
 
-	<option value="1">{{category.name}}</option>
+	<option value="{{path('post_list_category', {'categoryname': category.name|lower|slugify, 'id': category.id})}} " >{{category.name}} </option>
+	{# <option href="{{path('psot_list', {'categoryname': category.name, 'id': category.id})}} " value="1">{{category.name}}</option> #}
     
 {% endfor %}
 </select>

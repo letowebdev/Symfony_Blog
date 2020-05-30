@@ -28,6 +28,16 @@ class FrontController extends AbstractController
         ]);
     }
 
+    /**
+     * @Route("/post-list-category/category/{categoryname},{id}", name="post_list_category")
+     */
+    public function postListCategory()
+    {
+        return $this->render('front/post_list.html.twig', [
+            'controller_name' => 'FrontController',
+        ]);
+    }
+
      /**
      * @Route("/post-details", name="post_details")
      */
@@ -68,7 +78,7 @@ class FrontController extends AbstractController
 
     public function mainCategories()
     {
-        $categories = $this->getDoctrine()
+        $categories =$this->getDoctrine()
         ->getRepository(Category::class)
         ->findBy(['parent'=>null], ['name' => 'ASC']);
         return $this->render('front/_main_categories.html.twig', [
