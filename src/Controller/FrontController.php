@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Category;
+use App\Utils\CategoryTreeFrontPage;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
@@ -31,8 +32,9 @@ class FrontController extends AbstractController
     /**
      * @Route("/post-list-category/category/{categoryname},{id}", name="post_list_category")
      */
-    public function postListCategory()
+    public function postListCategory($id, CategoryTreeFrontPage $categories)
     {
+        dump($categories);
         return $this->render('front/post_list.html.twig', [
             'controller_name' => 'FrontController',
         ]);
