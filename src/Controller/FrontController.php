@@ -19,18 +19,18 @@ class FrontController extends AbstractController
         ]);
     }
 
-    /**
-     * @Route("/post-list", name="post_list")
-     */
-    public function postList()
-    {
-        return $this->render('front/post_list.html.twig', [
-            'controller_name' => 'FrontController',
-        ]);
-    }
+    // /**
+    //  * @Route("/post-list", name="post_list")
+    //  */
+    // public function postList()
+    // {
+    //     return $this->render('front/post_list.html.twig', [
+    //         'controller_name' => 'FrontController',
+    //     ]);
+    // }
 
     /**
-     * @Route("/post-list-category/category/{categoryname},{id}", name="post_list_category")
+     * @Route("/post-list/category/{categoryname},{id}", name="post_list")
      */
     public function postListCategory($id, CategoryTreeFrontPage $categories)
     {

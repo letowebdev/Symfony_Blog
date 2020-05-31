@@ -4,6 +4,7 @@
         <meta charset="UTF-8">
         <title>{% block title %}Leto Blog!{% endblock %}</title>
         <link rel="stylesheet" href="{{asset('assets/css/bootstrap.min.css')}}">
+        <link rel="stylesheet" href="{{asset('assets/css/style.css')}}">
         <link rel="stylesheet" href="{{asset('https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css')}}">
         {% block stylesheets %}{% endblock %}
     </head>
@@ -21,9 +22,9 @@
       <li {% if route_name == "main_page" %} class="nav-item active" {% else %} class="nav-item" {% endif %}>
         <a class="nav-link" href="{{path('main_page')}}">Home <span class="sr-only">(current)</span></a>
       </li>
-      <li {% if route_name == "post_list" %} class="nav-item active" {% else %} class="nav-item" {% endif %}>
+      {# <li {% if route_name == "post_list" %} class="nav-item active" {% else %} class="nav-item" {% endif %}>
         <a class="nav-link" href="{{path('post_list')}}">Posts</a>
-      </li>
+      </li> #}
        <li {% if route_name == "register" %} class="nav-item active" {% else %} class="nav-item" {% endif %}>
         <a class="nav-link" href="{{path('register')}}">Register</a>
       </li>
