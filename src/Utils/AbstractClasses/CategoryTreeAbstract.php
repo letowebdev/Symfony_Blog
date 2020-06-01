@@ -9,7 +9,7 @@ abstract class CategoryTreeAbstract {
     public $categoriesArrayFromDb;
     public $categorylist;
     protected static $dbconnection;
-    
+
     public function __construct(EntityManagerInterface $entitymanager, UrlGeneratorInterface $urlgenerator)
     {
         $this->entitymanager = $entitymanager;
@@ -52,12 +52,5 @@ abstract class CategoryTreeAbstract {
             return self::$dbconnection = $stmt->fetchAll();
         }
     }
-
-
-
-
-
-
-
 
 }

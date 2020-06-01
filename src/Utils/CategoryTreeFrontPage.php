@@ -1,8 +1,8 @@
 <?php
 namespace App\Utils;
 
-use App\Twig\AppExtension;
 use App\Utils\AbstractClasses\CategoryTreeAbstract;
+use App\Twig\AppExtension;
 
 class CategoryTreeFrontPage extends CategoryTreeAbstract {
 
@@ -26,14 +26,14 @@ class CategoryTreeFrontPage extends CategoryTreeAbstract {
         return $this->getCategoryList($categories_array);
     }
 
-   public function getCategoryList(array $categories_array)
+    public function getCategoryList(array $categories_array)
     {
         $this->categorylist .= $this->html_1;
         foreach ($categories_array as $value)
         {
             $catName = $this->slugger->slugify($value['name']);
             
-            $url = $this->urlgenerator->generate('video_list', ['categoryname'=>$catName, 'id'=>$value['id']]);
+            $url = $this->urlgenerator->generate('post_list', ['categoryname'=>$catName, 'id'=>$value['id']]);
             $this->categorylist .= $this->html_2 . $this->html_3 . $url . $this->html_4 . $catName . $this->html_5;
             if(!empty($value['children']))
             {
@@ -61,5 +61,5 @@ class CategoryTreeFrontPage extends CategoryTreeAbstract {
                 ];
         }
     }
-
+ 
 }

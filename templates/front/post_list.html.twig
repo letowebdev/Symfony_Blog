@@ -38,8 +38,8 @@
                         </div>
                         <h3>Sub Categories</h3>
                         <hr>
-                      
-                            {{subCategories| raw}}
+                            <li><a href="{{path('post_list',{'categoryname':subcategories.mainParentName|slugify|lower, 'id':subcategories.mainParentId})}}">{{subcategories.mainParentName}}</a></li>
+                            {{subcategories.categoryList| raw}}
                             {# <li class="list-group-item">Vestibulum at eros</li> #}
                       
                     </div>
