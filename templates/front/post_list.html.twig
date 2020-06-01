@@ -36,7 +36,7 @@
                             {{render(controller("App\\Controller\\FrontController::mainCategories"))}}
                             
                         </div>
-                        <h3>Sub Categories</h3>
+                        <h3>{{subcategories.currentCategoryName}} Category</h3>
                         <hr>
                             <li><a href="{{path('post_list',{'categoryname':subcategories.mainParentName|slugify|lower, 'id':subcategories.mainParentId})}}">{{subcategories.mainParentName}}</a></li>
                             {{subcategories.categorylist| raw}}
