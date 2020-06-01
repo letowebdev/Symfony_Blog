@@ -27,8 +27,10 @@ class AdminController extends AbstractController
     public function categories(CategoryTreeAdminList $categories)
     {
         $categories->getCategoryList($categories->buildTree());
-        dump($categories);
-        return $this->render('admin/categories.html.twig');
+        
+        return $this->render('admin/categories.html.twig', [
+            'categories'=>$categories->categorylist
+        ]);
     }
 
     /**
