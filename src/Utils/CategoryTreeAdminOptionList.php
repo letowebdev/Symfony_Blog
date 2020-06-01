@@ -1,6 +1,8 @@
 <?php
 namespace App\Utils;
 
+use App\Utils\AbstractClasses\CategoryTreeAbstract;
+
 class CategoryTreeAdminOptionList extends CategoryTreeAbstract 
 {
     public function getCategoryList(array $categories_array, int $repeat = 0)
