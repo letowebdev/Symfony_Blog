@@ -23,6 +23,7 @@
         <br>
 	    <label for="inlineFormCustomSelect">Parent:</label>
         <select class="custom-select mr-sm-2" id="inlineFormCustomSelect">
+         {{render(controller('App\\Controller\\AdminController::getAllCategories'))}}
             <option value="1">Funny</option>
             <option value="1">--For kids</option>
             <option value="1">--For adults</option>
