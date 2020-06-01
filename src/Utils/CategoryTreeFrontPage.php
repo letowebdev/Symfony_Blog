@@ -6,12 +6,12 @@ use App\Twig\AppExtension;
 
 class CategoryTreeFrontPage extends CategoryTreeAbstract {
 
-    public $html_1 = '<ul>';
+    public $html_1 = '<ul><br>';
     public $html_2 = '<li>';
     public $html_3 = '<a href="';
     public $html_4 = '">';
     public $html_5 = '</a>';
-    public $html_6 = '</li>';
+    public $html_6 = '</li><br>';
     public $html_7 = '</ul>';
 
     public function getCategoryListAndParent(int $id): string
