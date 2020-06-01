@@ -34,9 +34,10 @@ class FrontController extends AbstractController
      */
     public function postListCategory($id, CategoryTreeFrontPage $categories)
     {
-        dump($categories);
+        $subCategories = $categories->buildTree($id);
+        // dump($subCategories);
         return $this->render('front/post_list.html.twig', [
-            'controller_name' => 'FrontController',
+            'subCategories' => $categories->getCategoryList($subCategories)
         ]);
     }
 
