@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Post;
 use App\Entity\Category;
 use App\Utils\CategoryTreeFrontPage;
 use Symfony\Component\Routing\Annotation\Route;
@@ -24,10 +25,14 @@ class FrontController extends AbstractController
      */
     public function postList($id, CategoryTreeFrontPage $categories)
     {
+        $posts = $this->getDoctrine()
+        ->getRepository(Post::class)
+        ->findAll();
         $categories->getCategoryListAndParent($id);
-        dump($categories);
+        // dump($categories);
         return $this->render('front/post_list.html.twig',[
-            'subcategories' => $categories
+            'subcategories' => $categories,
+            'posts'=>$posts
         ]);
     }
 
