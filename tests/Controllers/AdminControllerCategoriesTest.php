@@ -67,4 +67,11 @@ class AdminControllerCategoriesTest extends WebTestCase
         $category = $this->entityManager->getRepository(Category::class)->find(1);
         $this->assertSame('PHP 2', $category->getName());
     }
+
+    public function testDeleteCategory()
+    {
+        $crawler = $this->client->request('GET', '/admin/delete-category/12');
+        $category = $this->entityManager->getRepository(Category::class)->find(12);
+        $this->assertNull($category);
+    }
 }
