@@ -23,12 +23,12 @@
         {{ form_widget(form.name,{'attr': {'class': 'form-control' ~ is_invalid, 'placeholder': 'Category name'}, 'id': 'validationServer01' }) }}
         <br>
 	    <label for="inlineFormCustomSelect">Parent:</label>
-        <select class="custom-select mr-sm-2" id="inlineFormCustomSelect">
+        <select name="category[parent]" class="custom-select mr-sm-2" id="inlineFormCustomSelect">
             {{render(controller('App\\Controller\\AdminController::getAllCategories'))}}
         </select>
-        <div class="invalid-feedback">
+        <h4 class="text-danger">
            {{ form_errors(form.name) }}
-        </div>
+        </h4>
         <button class="btn btn-primary mt-3" type="submit">Add</button>
     </div>
 {{ form_end(form) }}

@@ -38,8 +38,17 @@ class AdminController extends AbstractController
 
         if($form->isSubmitted() && $form->isValid())
         {
-            // save category
-            dd('valid');
+            $category->setName($request->request->get('category')['name']);
+
+            $repository = $this->getDoctrine()->getRepository(Category::class);
+            $parent = $repository->find($request->request->get('category')['parent']);
+            $category->setParent($parent);
+
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($category);
+            $entityManager->flush();
+
+            return $this->redirectToRoute('categories');
         }
         elseif($request->isMethod('post'))
         {
