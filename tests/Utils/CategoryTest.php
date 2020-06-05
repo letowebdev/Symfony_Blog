@@ -1,9 +1,5 @@
 <?php
-/**
- * In this test I'm going to check regardless the category I click 
- * I should get the same set of categories list urls and ids without 
- * interacting with database 
- */
+
 namespace App\Tests\Utils;
 
 // use PHPUnit\Framework\TestCase;
@@ -13,17 +9,27 @@ use App\Twig\AppExtension;
 class CategoryTest extends KernelTestCase
 {
     protected $mockedCategoryTreeFrontPage;
+    protected $mockedCategoryTreeAdminList;
+    protected $mockedCategoryTreeAdminOptionList;
 
     protected function setUp()
     {
         $kernel = self::bootKernel();
         $urlgenerator = $kernel->getContainer()->get('router');
-        $this->mockedCategoryTreeFrontPage = $this->getMockBuilder('App\Utils\CategoryTreeFrontPage')
-        ->disableOriginalConstructor()
-        ->setMethods() // if no, all methods return null unless mocked
-        ->getMock();
-
-        $this->mockedCategoryTreeFrontPage->urlgenerator = $urlgenerator;
+        $tested_classes = [
+            'CategoryTreeAdminList',
+            'CategoryTreeAdminOptionList',
+            'CategoryTreeFrontPage'
+        ];
+        foreach($tested_classes as $class)
+        {
+            $name = 'mocked'.$class;
+            $this->$name = $this->getMockBuilder('App\Utils\\'.$class)
+            ->disableOriginalConstructor()
+            ->setMethods() // if no, all methods return null unless mocked
+            ->getMock();
+            $this->$name->urlgenerator = $urlgenerator;
+        }
     }
 
     /**
@@ -36,6 +42,16 @@ class CategoryTest extends KernelTestCase
         $main_parent_id = $this->mockedCategoryTreeFrontPage->getMainParent($id)['id'];
         $array = $this->mockedCategoryTreeFrontPage->buildTree($main_parent_id);
         $this->assertSame($string, $this->mockedCategoryTreeFrontPage->getCategoryList($array));
+    }
+
+    /**
+     * @dataProvider dataForCategoryTreeAdminOptionList
+     */
+    public function testCategoryTreeAdminOptionList($arrayToCompare, $arrayFromDb)
+    {
+        $this->mockedCategoryTreeAdminOptionList->categoriesArrayFromDb = $arrayFromDb;
+        $arrayFromDb = $this->mockedCategoryTreeAdminOptionList->buildTree();
+        $this->assertSame($arrayToCompare, $this->mockedCategoryTreeAdminOptionList->getCategoryList($arrayFromDb));
     }
 
     public function dataForCategoryTreeFrontPage()
@@ -89,7 +105,23 @@ class CategoryTest extends KernelTestCase
         ];
     }
 
-
+    public function dataForCategoryTreeAdminOptionList()
+    {
+        yield [
+            [
+                ['name'=>'JavaScript','id'=>2],
+                ['name'=>'--VanillaJs','id'=>9],
+                ['name'=>'--NodeJS','id'=>10],
+                ['name'=>'----Express','id'=>18]
+            ],
+            [ 
+                ['name'=>'JavaScript','id'=>2, 'parent_id'=>null],
+                ['name'=>'VanillaJs','id'=>9, 'parent_id'=>2],
+                ['name'=>'NodeJS','id'=>10, 'parent_id'=>2],
+                ['name'=>'Express','id'=>18, 'parent_id'=>10]
+            ]
+         ];
+    }
 
 
 
