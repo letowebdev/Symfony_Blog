@@ -54,6 +54,16 @@ class CategoryTest extends KernelTestCase
         $this->assertSame($arrayToCompare, $this->mockedCategoryTreeAdminOptionList->getCategoryList($arrayFromDb));
     }
 
+    /**
+     * @dataProvider dataForCategoryTreeAdminList
+     */
+    public function testCategoryTreeAdminList($string, $array)
+    {
+        $this->mockedCategoryTreeAdminList->categoriesArrayFromDb = $array;
+        $array = $this->mockedCategoryTreeAdminList->buildTree();
+        $this->assertSame($string, $this->mockedCategoryTreeAdminList->getCategoryList($array));
+    }
+
     public function dataForCategoryTreeFrontPage()
     {
         yield [
@@ -123,7 +133,32 @@ class CategoryTest extends KernelTestCase
          ];
     }
 
+    public function dataForCategoryTreeAdminList()
+    {
+        yield [
+            '<ul class="fa-ul text-left"><li><i class="fa-li fa fa-arrow-right"></i>  PHP<a href="/admin/edit-category/1"> Edit</a> <a onclick="return confirm(\'Are you sure?\');" href="/admin/delete-category/1">Delete</a></li></ul>',
+            [ ['id'=>1,'parent_id'=>null,'name'=>'PHP'] ]
+         ];
 
+         yield [
+            '<ul class="fa-ul text-left"><li><i class="fa-li fa fa-arrow-right"></i>  PHP<a href="/admin/edit-category/1"> Edit</a> <a onclick="return confirm(\'Are you sure?\');" href="/admin/delete-category/1">Delete</a></li><li><i class="fa-li fa fa-arrow-right"></i>  JavaScript<a href="/admin/edit-category/2"> Edit</a> <a onclick="return confirm(\'Are you sure?\');" href="/admin/delete-category/2">Delete</a></li></ul>',
+            [
+                ['id'=>1,'parent_id'=>null,'name'=>'PHP'],
+                ['id'=>2,'parent_id'=>null,'name'=>'JavaScript']
+            ]
+         ];
+
+         yield [
+            '<ul class="fa-ul text-left"><li><i class="fa-li fa fa-arrow-right"></i>  JavaScript<a href="/admin/edit-category/2"> Edit</a> <a onclick="return confirm(\'Are you sure?\');" href="/admin/delete-category/2">Delete</a></li><li><i class="fa-li fa fa-arrow-right"></i>  Go<a href="/admin/edit-category/3"> Edit</a> <a onclick="return confirm(\'Are you sure?\');" href="/admin/delete-category/3">Delete</a><ul class="fa-ul text-left"><li><i class="fa-li fa fa-arrow-right"></i>  NodeJS<a href="/admin/edit-category/4"> Edit</a> <a onclick="return confirm(\'Are you sure?\');" href="/admin/delete-category/4">Delete</a><ul class="fa-ul text-left"><li><i class="fa-li fa fa-arrow-right"></i>  Symfony<a href="/admin/edit-category/5"> Edit</a> <a onclick="return confirm(\'Are you sure?\');" href="/admin/delete-category/5">Delete</a></li></ul></li></ul></li></ul>',
+
+            [
+                ['id'=>2,'parent_id'=>null,'name'=>'JavaScript'],
+                ['id'=>3,'parent_id'=>null,'name'=>'Go'],
+                ['id'=>4,'parent_id'=>3,'name'=>'NodeJS'],
+                ['id'=>5,'parent_id'=>4,'name'=>'Symfony']
+            ]
+         ];
+    }
 
 
 }
