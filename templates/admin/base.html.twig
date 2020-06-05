@@ -5,58 +5,41 @@
 {% block menu %}{% endblock %}
 
 {% block main %}
+{% set route_name = app.request.attributes.get('_route') %}
     <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-  <a class="navbar-brand" href="{{path('main_page')}}">Leto's Blog</a>
+  <a class="navbar-brand" href="{{path('main_page')}}">Admin</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
 
   <div class="collapse navbar-collapse" id="navbarColor01">
     <ul class="navbar-nav mr-auto contai">
-      <li class="nav-item active">
+      <li class="nav-item">
         <a class="nav-link" href="{{path('main_page')}}">Go to public site <span class="sr-only">(current)</span></a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="{{path('main_page')}}">Logged as John Smith</a>
+        <a class="nav-link disabled text-info" href="#">Logged as John Smith</a>
       </li>
-      <li class="nav-item">
+      <li {% if route_name == "admin_main_page" %} class="nav-item active" {% else %} class="nav-item" {% endif %}>
+        <a class="nav-link" href="{{path('admin_main_page')}}"> My profile</a>
+      </li>
+      <li {% if route_name == "categories" %} class="nav-item active" {% else %} class="nav-item" {% endif %}>
+       <a class="nav-link" href="{{path('categories')}}">Categories</a>
+      </li>
+       <li {% if route_name == "upload_post" %} class="nav-item active" {% else %} class="nav-item" {% endif %}>
+        <a class="nav-link" href="{{path('upload_post')}}">Upload a post</a>
+      </li>
+       <li {% if route_name == "users" %} class="nav-item active" {% else %} class="nav-item" {% endif %}>
+       <a class="nav-link" href="{{path('users')}}">Users</a>
+      </li>
+       <li class="nav-item">
         <a class="nav-link" href="{{path('register')}}">Logout</a>
       </li>
     </ul>
   </div>
 </nav>
 
-<div class="row">
-            <nav class="col-md-2 d-none d-md-block card">
-                <div class="card-body p-4">
-
-                    <ul class="navbar-nav mr-auto">
-                        <li class="nav-item active">
-                            <a class="nav-link" href="{{path('admin_main_page')}}"> My profile</a>
-                        </li>
-                        <hr>
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{path('categories')}}">Categories</a>
-                        </li>
-                        <hr>
-                        <li class="nav-item">
-                            <a class="nav-link"  href="{{path('posts')}}">Posts</a>
-                        </li>
-                        <hr>
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{path('upload_post')}}">Upload a post</a>
-                        </li>
-                        <hr>
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{path('users')}}">Users</a>
-                        </li>
-                    </ul>
-
-                </div>
-
-            </nav>
-
-            <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
+            <main role="main" class="container">
                 <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
                     <h1 class="h2"><a href="{{path('admin_main_page')}}">Dashboard</a></h1>
                 </div>
