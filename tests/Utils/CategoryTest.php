@@ -1,5 +1,9 @@
 <?php
-
+/**
+ * In this test I'm going to check regardless the category I click 
+ * I should get the same set of categories list urls and ids without 
+ * interacting with database 
+ */
 namespace App\Tests\Utils;
 
 // use PHPUnit\Framework\TestCase;
