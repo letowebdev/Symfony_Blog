@@ -3,11 +3,17 @@
 {% block main %}
 <div class="container">
 	<div class="jumbotron mt-4">
-		<h1 class="display-3">No results were found!</h1>
-
-        <h1 class="display-3">Search results</h1>
-		
+	 	{% if posts %}
+		<h1 class="display-3">Search results</h1>
+		{{ include('front/includes/_sort.html.twig',{'query':query}) }}
+		 {% else %}
+		 <h1 class="display-3">No results were found!</h1>
+        
+		 {% endif %}
 	</div>
+	{% if posts %}
+	{{ include('front/includes/_posts.html.twig', {'posts' : posts}) }}
+	{% endif %}
 </div>
 
 
