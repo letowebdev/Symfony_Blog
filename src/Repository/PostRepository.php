@@ -35,6 +35,32 @@ class PostRepository extends ServiceEntityRepository
         return $pagination;
     }
 
+    public function findByTitle(string $query, int $page, ?string $sort_method)
+    {
+        $sort_method = $sort_method != 'rating' ? $sort_method : 'ASC'; // tmp
+
+        $querybuilder = $this->createQueryBuilder('p');
+        $searchTerms = $this->prepareQuery($query);
+
+        foreach ($searchTerms as $key => $term)
+        {
+            $querybuilder
+                ->orWhere('p.title LIKE :t_'.$key)
+                ->setParameter('t_'.$key, '%'.trim($term).'%'); 
+        }
+
+        $dbquery =  $querybuilder
+            ->orderBy('p.title', $sort_method)
+            ->getQuery();
+
+        return $this->paginator->paginate($dbquery, $page, 3);
+    }
+
+    private function prepareQuery(string $query): array
+    {
+        return explode(' ',$query);
+    }
+
     // /**
     //  * @return Post[] Returns an array of Post objects
     //  */
