@@ -35,12 +35,13 @@
         <a class="nav-link" href="{{path('admin_main_page')}}">Dashboard</a>
       </li>
     </ul>
-    <form method="POST" action="{{path('search_results')}}" class="form-inline my-2 my-lg-0">
-      <input class="form-control mr-sm-2" type="text" placeholder="Search">
-      <button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
-    </form>
   </div>
 </nav>
+    <form method="POST" action="{{path('search_results')}}" class="container mt-2">
+      <div class="md-form active-cyan active-cyan-2 mb-3 ">
+    <input class="form-control mr-sm-2 bg-dark border-info text-light" type="text" placeholder="Search" aria-label="Search">
+</div>
+    </form>
       {% endblock %}
         
         {% block main %}{% endblock %}
