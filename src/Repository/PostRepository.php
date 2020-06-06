@@ -21,13 +21,15 @@ class PostRepository extends ServiceEntityRepository
         $this->paginator = $paginator;
     }
 
-    public function findAllPaginated($page)
+    public function findByChildIds($value, $page)
     {
 
         $dbquery =  $this->createQueryBuilder('p')
+        ->andWhere('p.category IN (:val)')
+        ->setParameter('val', $value)
         ->getQuery();
 
-        $pagination = $this->paginator->paginate($dbquery, $page, 5);
+        $pagination = $this->paginator->paginate($dbquery, $page, 3);
         return $pagination;
     }
 

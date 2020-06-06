@@ -25,9 +25,13 @@ class FrontController extends AbstractController
      */
     public function postList($id, $page, CategoryTreeFrontPage $categories)
     {
+        $ids = $categories->getChildIds($id);
+        array_push($ids, $id);
+
         $posts = $this->getDoctrine()
         ->getRepository(Post::class)
-        ->findAllPaginated($page);
+        ->findByChildIds($ids ,$page);
+
         $categories->getCategoryListAndParent($id);
         // dump($categories);
         return $this->render('front/post_list.html.twig',[
