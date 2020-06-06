@@ -7,9 +7,8 @@
 
 		<div class="row mt-4">
 
-
 			{{ include('front/includes/_posts.html.twig', {'posts' : posts}) }}
-
+             
 
 
             <div class="col-md-4">
@@ -22,6 +21,7 @@
                             <h3>Posts Main Categories</h3>
 
                             {{render(controller("App\\Controller\\FrontController::mainCategories"))}}
+                           
                             
                         </div>
                         <h3>{{subcategories.currentCategoryName}} Category</h3>

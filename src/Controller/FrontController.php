@@ -21,13 +21,13 @@ class FrontController extends AbstractController
     }
 
     /**
-     * @Route("/post-list/category/{categoryname},{id}", name="post_list")
+     * @Route("/post-list/category/{categoryname},{id}/{page}", defaults={"page": "1"}, name="post_list")
      */
-    public function postList($id, CategoryTreeFrontPage $categories)
+    public function postList($id, $page, CategoryTreeFrontPage $categories)
     {
         $posts = $this->getDoctrine()
         ->getRepository(Post::class)
-        ->findAll();
+        ->findAllPaginated($page);
         $categories->getCategoryListAndParent($id);
         // dump($categories);
         return $this->render('front/post_list.html.twig',[
