@@ -35,11 +35,15 @@
         <a class="nav-link" href="{{path('admin_main_page')}}">Dashboard</a>
       </li>
     </ul>
+
   </div>
 </nav>
-    <form method="GET" action="{{path('search_results')}}" class="container mt-2">
-      <div class="md-form active-cyan active-cyan-2 mb-3 ">
-    <input name="query" class="form-control mr-sm-2 bg-dark border-info text-light" type="text" placeholder="Search" aria-label="Search">
+    <form method="GET" action="{{path('search_results')}}">
+      <div class="input-group mb-3 container mt-2">
+  <div class="input-group-prepend">
+    <button class="btn btn-outline-info border-info">Search</button>
+  </div>
+  <input name="query" class="form-control mr-sm-2 bg-dark border-info text-white" type="search" placeholder="video title" aria-label="Search video">
 </div>
     </form>
       {% endblock %}
