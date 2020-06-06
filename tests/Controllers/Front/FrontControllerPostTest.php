@@ -35,4 +35,25 @@ class FrontControllerPostTest extends WebTestCase
 
         $this->assertGreaterThan(2, $crawler->filter('h3')->count());
     }
+
+    public function testSorting()
+    {
+        $client = static::createClient();
+        $client->followRedirects();
+     
+        $crawler = $client->request('GET', '/');
+    
+        $form = $crawler->selectButton('Search')->form([
+            'query' => 'post',
+        ]);
+        $crawler = $client->submit($form);
+
+        $form = $crawler->filter('#form-sorting')->form([
+            'sortby' => 'desc',
+        ]);
+
+        $crawler = $client->submit($form);
+
+        $this->assertEquals('Post 9', $crawler->filter('h3')->first()->text());
+    }
 }
