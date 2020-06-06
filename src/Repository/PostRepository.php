@@ -21,12 +21,14 @@ class PostRepository extends ServiceEntityRepository
         $this->paginator = $paginator;
     }
 
-    public function findByChildIds($value, $page)
+    public function findByChildIds($value, $page, $sort_method)
     {
+        $sort_method = $sort_method != 'rating' ? $sort_method : 'ASC'; // tmp
 
         $dbquery =  $this->createQueryBuilder('p')
         ->andWhere('p.category IN (:val)')
         ->setParameter('val', $value)
+        ->orderBy('p.title', $sort_method)
         ->getQuery();
 
         $pagination = $this->paginator->paginate($dbquery, $page, 3);
