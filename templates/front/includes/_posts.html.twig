@@ -5,7 +5,8 @@
 					<div class="card-header"><h4><h3>{{post.getTitle()}}</h3></h4></div>
 					<div class="card-body">
                     <img src="{{post.getPhoto()}}"  class="img-fluid" alt="Responsive image">
-						<p class="p-2">{{post.getbody()}} <a href="{{path('post_details')}}">...readMore</a> </p>
+						<p class="p-2">{{post.getbody()}} <a href="#">...readMore</a> </p>
+                        {# {{path('post_details')}} #}
 					</div>
                     <span class="card-header">Posted ON: {{post.createdAt().format('Y-m-d')}}
 

@@ -56,6 +56,18 @@ class PostRepository extends ServiceEntityRepository
         return $this->paginator->paginate($dbquery, $page, 3);
     }
 
+    public function postDetails($id)
+    {
+        return $this->createQueryBuilder('p')
+            ->leftJoin('p.comments', 'c')
+            ->leftJoin('c.user', 'u')
+            ->addSelect('c', 'u') //Eager loading to prevent lazy loading and reduce db queries
+            ->where('p.id = :id')
+            ->setParameter('id', $id)
+            ->getQuery()
+            ->getOneOrNullResult();
+    }
+
     private function prepareQuery(string $query): array
     {
         return explode(' ',$query);

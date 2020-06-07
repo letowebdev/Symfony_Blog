@@ -6,6 +6,7 @@ use App\Entity\Post;
 use App\Entity\User;
 use App\Form\UserType;
 use App\Entity\Category;
+use App\Repository\PostRepository;
 use App\Utils\CategoryTreeFrontPage;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
@@ -47,12 +48,12 @@ class FrontController extends AbstractController
     }
 
      /**
-     * @Route("/post-details", name="post_details")
+     * @Route("/post-details/{post}", name="post_details")
      */
-    public function postDetails()
+    public function postDetails(PostRepository $repo, $post)
     {
         return $this->render('front/post_details.html.twig', [
-            'controller_name' => 'FrontController',
+            'post' => $repo->postDetails($post),
         ]);
     }
 

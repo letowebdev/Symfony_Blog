@@ -5,7 +5,7 @@
 <div class="container">
 	<div class="row mt-4">
 
-		<div class="col-md-10">
+		<div class="col-md-12">
 			<div class="card mb-4">
 				<div class="card-header">
 					<h4>Post1</h4>
@@ -16,9 +16,37 @@
 				</div>
 			</div>
 		</div>
-
-
 	</div>
+	<div class="row m-2">
+    <a id="post_comments"></a>
+
+   {% for comment in post.comments %}
+
+    <ul class="list-unstyled text-left">
+        <li class="card">
+            <div class="media-body card-header bg-dark border-info">
+                <h5 class="mt-0 mb-1"><b>{{comment.user.name}} {{comment.user.lastname}}</b> <small class="text-muted">added a comment <small><b>{{comment.createdat|ago}}</b></small></small></h5>
+                {{comment.content}}
+            </div>
+        </li>
+    </ul>
+    <hr>
+
+    {% endfor %}
+
+</div>
+		<div class="row">
+    <div class="col-md-12">
+        <form method="POST" action="">
+            <div class="form-group">
+                <label for="exampleFormControlTextarea1">Add a comment</label>
+                <textarea required class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary">Add</button>
+
+        </form>
+    </div>
+</div>
 	</div>
 {% endblock %}
 
