@@ -1,15 +1,38 @@
         <div class="col-md-8">
             {% for post in posts %}
                 
-				<div class="card mb-4">
+				<div class="card">
 					<div class="card-header"><h4><h3>{{post.getTitle()}}</h3></h4></div>
 					<div class="card-body">
                     <img src="{{post.getPhoto()}}"  class="img-fluid" alt="Responsive image">
 						<p class="p-2">{{post.getbody()}} <a href="{{path('post_details')}}">...readMore</a> </p>
 					</div>
-                    <span class="card-header">Posted ON: {{post.createdAt().format('Y-m-d')}}</span>
+                    <span class="card-header">Posted ON: {{post.createdAt().format('Y-m-d')}}
+
+                    <div class="btn-group">
+
+                                    <i class="fa fa-thumbs-up text-info ml-2"><small class="text-info ml-1 ">(23)</small></i>&nbsp;
+                                    <i class="fa fa-thumbs-down text-danger"><small class="text-danger  ml-1 mr-2">(9)</small></i>
+                                    {% if is_granted('IS_AUTHENTICATED_REMEMBERED')  %}
+                                    <button data-toggle="tooltip" data-placement="top" title="Click to like the post"
+                                        type="button" class="btn btn-primary btn-outline-info btn-sm ml-1">
+                                        <i class="fa fa-thumbs-up"></i>
+                                    </button>
+                                    <!-- <button data-toggle="tooltip" data-placement="top" title="You like the post. Click to unlike" type="button" class="btn btn-primary btn-outline-success btn-sm mr-2">
+                                    <i class="fa fa-thumbs-up"></i>
+                                    </button> -->
+                                    <button data-toggle="tooltip" data-placement="top" title="Click to dislike the post"
+                                        type="button" class="btn btn-primary btn-outline-danger btn-sm ml-1 mr-1">
+                                        <i class="fa fa-thumbs-down"></i>
+                                    </button>
+                                    <!-- <button data-toggle="tooltip" data-placement="top" title="You don't like the post. Click to undo" type="button" class="btn btn-primary btn-outline-danger btn-sm mr-2">
+                                    <i class="fa fa-thumbs-down"></i>
+                                    </button> -->
+                                    {% endif  %}
+                                    <a class="ml-1" href="{{path('post_details')}}#post_comments">Comments (32)</a>
+                                </div>
+                    </span>
 				</div>
-                
             {% endfor %}
             {{ knp_pagination_render(posts) }}
         </div>
