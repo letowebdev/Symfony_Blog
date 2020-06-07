@@ -2,7 +2,7 @@
 namespace App\Tests;
 
 trait Rollback {
-    
+
     public function setUp()
     {
         parent::setUp();
@@ -10,17 +10,17 @@ trait Rollback {
             'PHP_AUTH_USER' => 'leto@symf5.de',
             'PHP_AUTH_PW' => 'passw',
         ]);
-        $this->client->disableReboot();
+        // $this->client->disableReboot();
 
         $this->entityManager = $this->client->getContainer()->get('doctrine.orm.entity_manager');
-        $this->entityManager->beginTransaction();
-        $this->entityManager->getConnection()->setAutoCommit(false);
+        // $this->entityManager->beginTransaction();
+        // $this->entityManager->getConnection()->setAutoCommit(false);
     }
 
     public function tearDown() :void
     {
         parent::tearDown();
-        $this->entityManager->rollback();    
+        // $this->entityManager->rollback();    
         $this->entityManager->close();    
         $this->entityManager = null; // avoid memory leaks   
     }
