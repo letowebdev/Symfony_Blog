@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\UserRepository;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -53,6 +55,24 @@ class User implements UserInterface
      * @Assert\NotBlank(message = "Valid last name is required.")
      */
     private $last_name;
+
+    /**
+     * @ORM\ManyToMany(targetEntity=Post::class, mappedBy="usersThatLike")
+     * @ORM\JoinTable(name="likes")
+     */
+    private $likedPosts;
+
+    /**
+     * @ORM\ManyToMany(targetEntity=Post::class, mappedBy="usersThatDontLike")
+     * @ORM\JoinTable(name="dislikes")
+     */
+    private $dislikedPosts;
+
+    public function __construct()
+    {
+        $this->likedPosts = new ArrayCollection();
+        $this->dislikedPosts = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -152,6 +172,62 @@ class User implements UserInterface
     public function setLastName(string $last_name): self
     {
         $this->last_name = $last_name;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Post[]
+     */
+    public function getLikedPosts(): Collection
+    {
+        return $this->likedPosts;
+    }
+
+    public function addLikedPost(Post $likedPost): self
+    {
+        if (!$this->likedPosts->contains($likedPost)) {
+            $this->likedPosts[] = $likedPost;
+            $likedPost->addUsersThatLike($this);
+        }
+
+        return $this;
+    }
+
+    public function removeLikedPost(Post $likedPost): self
+    {
+        if ($this->likedPosts->contains($likedPost)) {
+            $this->likedPosts->removeElement($likedPost);
+            $likedPost->removeUsersThatLike($this);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Post[]
+     */
+    public function getDislikedPosts(): Collection
+    {
+        return $this->dislikedPosts;
+    }
+
+    public function addDislikedPost(Post $dislikedPost): self
+    {
+        if (!$this->dislikedPosts->contains($dislikedPost)) {
+            $this->dislikedPosts[] = $dislikedPost;
+            $dislikedPost->addUsersThatDontLike($this);
+        }
+
+        return $this;
+    }
+
+    public function removeDislikedPost(Post $dislikedPost): self
+    {
+        if ($this->dislikedPosts->contains($dislikedPost)) {
+            $this->dislikedPosts->removeElement($dislikedPost);
+            $dislikedPost->removeUsersThatDontLike($this);
+        }
 
         return $this;
     }
