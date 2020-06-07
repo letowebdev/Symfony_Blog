@@ -2,10 +2,11 @@
 
 namespace App\DataFixtures;
 
-use Doctrine\Bundle\FixturesBundle\Fixture;
-use Doctrine\Persistence\ObjectManager;
 use App\Entity\Post;
+use App\Entity\User;
 use App\Entity\Category;
+use Doctrine\Persistence\ObjectManager;
+use Doctrine\Bundle\FixturesBundle\Fixture;
 
 
 class PostFixtures extends Fixture
@@ -26,6 +27,40 @@ class PostFixtures extends Fixture
         }
 
         $manager->flush();
+    }
+
+    public function loadLikes($manager)
+    {
+        foreach($this->likesData() as [$post_id, $user_id])
+        {
+
+            $post = $manager->getRepository(Post::class)->find($post_id);
+            $user = $manager->getRepository(User::class)->find($user_id);
+
+            $post->addUsersThatLike($user);
+            $manager->persist($post);
+        }
+    
+            $manager->flush();
+            $this->loadLikes($manager);
+            $this->loadDislikes($manager);
+           
+    }
+
+    public function loadDislikes($manager)
+    {
+        foreach($this->dislikesData() as [$post_id, $user_id])
+        {
+
+            $post = $manager->getRepository(Post::class)->find($post_id);
+            $user = $manager->getRepository(User::class)->find($user_id);
+
+            $post->addUsersThatDontLike($user);
+            $manager->persist($post);
+        }
+
+        $manager->flush();
+       
     }
 
     private function PostData()
@@ -57,6 +92,38 @@ class PostFixtures extends Fixture
             ['Post  4','This is some content...','http://icons.iconarchive.com/icons/paomedia/small-n-flat/1024/post-it-icon.png',  2],
             ['Post  5','This is some content...','http://icons.iconarchive.com/icons/paomedia/small-n-flat/1024/post-it-icon.png',  2],
             ['Post  6','This is some content...','http://icons.iconarchive.com/icons/paomedia/small-n-flat/1024/post-it-icon.png',  2]
+
+        ];
+    }
+
+    private function likesData()
+    {
+            return [
+    
+                [12,1],
+                [12,2],
+                [12,3],
+    
+                [11,1],
+                [11,4],
+    
+                [1,1],
+                [1,2],
+                [1,3],
+    
+                [2,1],
+                [2,2]
+    
+            ];
+    }
+
+    private function dislikesData()
+    {
+        return [
+
+            [10,1],
+            [10,2],
+            [10,3]
 
         ];
     }
