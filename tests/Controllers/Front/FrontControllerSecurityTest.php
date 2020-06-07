@@ -23,5 +23,6 @@ class FrontControllerSecurityTest extends WebTestCase
         yield ['/admin'];
         yield ['/admin/su/categories'];
         yield ['/admin/su/delete-category/1'];
+        yield ['/admin/su/edit-category/2'];
     }
 }
