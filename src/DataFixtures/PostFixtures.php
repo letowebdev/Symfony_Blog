@@ -27,6 +27,8 @@ class PostFixtures extends Fixture
         }
 
         $manager->flush();
+        $this->loadLikes($manager);
+        $this->loadDislikes($manager);
     }
 
     public function loadLikes($manager)
@@ -42,9 +44,7 @@ class PostFixtures extends Fixture
         }
     
             $manager->flush();
-            $this->loadLikes($manager);
-            $this->loadDislikes($manager);
-           
+        
     }
 
     public function loadDislikes($manager)
