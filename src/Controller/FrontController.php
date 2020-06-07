@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Post;
 use App\Entity\User;
 use App\Form\UserType;
+use App\Entity\Comment;
 use App\Entity\Category;
 use App\Repository\PostRepository;
 use App\Utils\CategoryTreeFrontPage;
@@ -57,6 +58,30 @@ class FrontController extends AbstractController
         ]);
     }
 
+    /**
+     * @Route("/new-comment/{post}", methods={"POST"}, name="new_comment")
+    */
+    public function newComment(Post $post, Request $request )
+     {
+        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_REMEMBERED');
+        
+        if ( !empty( trim($request->request->get('comment')) ) ) 
+        {   
+
+            // $post = $this->getDoctrine()->getRepository(post::class)->find($post_id);
+        
+            $comment = new Comment();
+            $comment->setContent($request->request->get('comment'));
+            $comment->setUser($this->getUser());
+            $comment->setPost($post); //symfony will find the post using param converter
+
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($comment);
+            $em->flush();
+        }
+        
+        return $this->redirectToRoute('post_details',['post'=>$post->getId()]);
+     }
 
     /**
      * @Route("/search-results/{page}", methods={"GET"}, defaults={"page": "1"}, name="search_results")

@@ -8,21 +8,23 @@
 		<div class="col-md-12">
 			<div class="card mb-4">
 				<div class="card-header">
-					<h4>Post1</h4>
+					<h4>{{post.title}}</h4>
 				</div>
 				<div class="card-body">
 					<img src="{{asset ('https://scx2.b-cdn.net/gfx/news/hires/2019/2-nature.jpg')}}" class="img-fluid" alt="Responsive image">
-					<p class="p-2">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
+					<p class="p-2">{{post.body}}</p>
 				</div>
+                <span class="card-header">Posted ON: {{post.createdAt().format('Y-m-d')}}
 			</div>
 		</div>
 	</div>
 	<div class="row m-2">
     <a id="post_comments"></a>
+    <div class="card bg-dark col-md-12 mb-2"><h3>Comments ({{post.comments.count}})</h3></div>
 
    {% for comment in post.comments %}
 
-    <ul class="list-unstyled text-left">
+    <ul class="list-unstyled text-left col-md-12">
         <li class="card">
             <div class="media-body card-header bg-dark border-info">
                 <h5 class="mt-0 mb-1"><b>{{comment.user.name}} {{comment.user.lastname}}</b> <small class="text-muted">added a comment <small><b>{{comment.createdat|ago}}</b></small></small></h5>
@@ -37,10 +39,10 @@
 </div>
 		<div class="row">
     <div class="col-md-12">
-        <form method="POST" action="">
+        <form method="POST" action="{{path ('new_comment',{'post':post.id})}}#post_comments">
             <div class="form-group">
                 <label for="exampleFormControlTextarea1">Add a comment</label>
-                <textarea required class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                <textarea name="comment" required class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
             </div>
             <button type="submit" class="btn btn-primary">Add</button>
 
