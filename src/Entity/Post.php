@@ -46,6 +46,7 @@ class Post
 
     /**
      * @ORM\ManyToOne(targetEntity=Category::class, inversedBy="posts")
+     * @ORM\JoinColumn(name="category_id", referencedColumnName="id", onDelete="CASCADE")
      */
     private $category;
 
