@@ -29,7 +29,7 @@
                                     <i class="fa fa-thumbs-down"></i>
                                     </button> -->
                                     {% endif  %}
-                                    <a class="ml-1" href="{{path('post_details')}}#post_comments">Comments (32)</a>
+                                    <a class="ml-1" href="{{path('post_details',{'post':post.id})}}#post_comments">Comments ({{post.comments.count}})</a>
                                 </div>
                     </span>
 				</div>
