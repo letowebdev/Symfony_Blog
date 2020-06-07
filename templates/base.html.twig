@@ -38,14 +38,19 @@
 
   </div>
 </nav>
-    <form method="GET" action="{{path('search_results')}}">
-      <div class="input-group mb-3 container mt-2">
-  <div class="input-group-prepend">
-    <button class="btn btn-outline-info border-info">Search</button>
-  </div>
-  <input name="query" class="form-control mr-sm-2 bg-dark border-info text-white" type="search" placeholder="video title" aria-label="Search video">
-</div>
-    </form>
+
+      {% endblock %}
+      {% block search %}
+      
+        <form method="GET" action="{{path('search_results')}}">
+          <div class="input-group mb-3 container mt-2">
+            <div class="input-group-prepend">
+              <button class="btn btn-outline-info border-info">Search</button>
+            </div>
+            <input name="query" class="form-control mr-sm-2 bg-dark border-info text-white" type="search" placeholder="video title" aria-label="Search video">
+          </div>
+        </form>
+
       {% endblock %}
         
         {% block main %}{% endblock %}
