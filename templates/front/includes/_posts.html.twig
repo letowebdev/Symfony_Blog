@@ -11,14 +11,13 @@
                     <span class="card-header">Posted ON: {{post.createdAt().format('Y-m-d')}}
 
                     <div class="btn-group">
-
-                                    <i class="fa fa-thumbs-up text-info ml-2"><small class="text-info ml-1 number-of-likes-{{post.id}}">({{post.usersThatLike.count}})</small></i>&nbsp;
-                                    <i class="fa fa-thumbs-down text-danger"><small class="text-danger  ml-1 mr-2 number-of-dislikes-{{post.id}}">({{post.usersThatDontLike.count}})</small></i>
-                                    {% if is_granted('IS_AUTHENTICATED_REMEMBERED')  %}
-                                     {{ include('front/includes/_likes.html.twig', {'post' : post}) }}
-                                    {% endif  %}
-                                    <a class="ml-1" href="{{path('post_details',{'post':post.id})}}#post_comments">Comments ({{post.comments.count}})</a>
-                                </div>
+                            <i class="fa fa-thumbs-up text-info ml-2"><small class="text-info ml-1 number-of-likes-{{post.id}}">({{post.usersThatLike.count}})</small></i>&nbsp;
+                            <i class="fa fa-thumbs-down text-danger"><small class="text-danger  ml-1 mr-2 number-of-dislikes-{{post.id}}">({{post.usersThatDontLike.count}})</small></i>
+                            {% if is_granted('IS_AUTHENTICATED_REMEMBERED')  %}
+                                {{ include('front/includes/_likes.html.twig', {'post' : post}) }}
+                            {% endif  %}
+                            <a class="ml-1" href="{{path('post_details',{'post':post.id})}}#post_comments">Comments ({{post.comments.count}})</a>
+                        </div>
                     </span>
 				</div>
             {% endfor %}
