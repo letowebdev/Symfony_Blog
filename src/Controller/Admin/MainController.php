@@ -4,7 +4,9 @@ namespace App\Controller\Admin;
 
 use App\Entity\Post;
 use App\Entity\User;
+use App\Form\UserType;
 use App\Utils\CategoryTreeAdminOptionList;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
@@ -16,10 +18,38 @@ class MainController extends AbstractController {
     /**
      * @Route("/", name="admin_main_page")
      */
-    public function index()
+    public function index(Request $request)
     {
-        return $this->render('admin/my_profile.html.twig');
+        $form = $this->createForm(UserType::class);
+        $form->handleRequest($request);
+        $is_invalid = null;
+        if ($form->isSubmitted() && $form->isValid())
+        {
+            exit('valid');
+        }
+
+
+        return $this->render('admin/my_profile.html.twig', [
+            'form'=>$form->createView(),
+            'is_invalid' => $is_invalid
+        ]);
     }
+    /**
+     * @Route("/delete-account", name="delete_account")
+     */
+    public function deleteAccount()
+    {
+        $em = $this->getDoctrine()->getManager();
+        $user = $em->getRepository(User::class)->find($this->getUser());
+
+        $em->remove($user);
+        $em->flush();
+
+        session_destroy();
+
+        return $this->redirectToRoute('main_page');
+    }
+
     /**
      * @Route("/posts", name="posts")
      */
@@ -48,4 +78,6 @@ class MainController extends AbstractController {
             'editedCategory' => $editedCategory
         ]);
     }
+
+
 }
