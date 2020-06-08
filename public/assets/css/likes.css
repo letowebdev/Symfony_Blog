@@ -1,0 +1,6 @@
+.click-to-unlike-post,
+.click-to-undo-dislike-post,
+.click-to-like-post,
+.click-to-dislike-post {
+  display: none;
+}
