@@ -1,7 +1,7 @@
 <?php
 namespace App\Tests;
 
-trait Rollback {
+trait RoleAdmin {
 
     public function setUp()
     {
