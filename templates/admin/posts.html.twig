@@ -24,11 +24,11 @@
       </tr>
     </thead>
     <tbody>
-        {% for i in 1..10 %}
+        {% for post in posts %}
       <tr>
-        <td>{{i}}</td>
-        <td>Post name</td>
-        <td><a target="_blank" href="http://vimeo.com">go to post</a></td>
+        <td>{{loop.index}}</td>
+        <td>{{post.title}}</td>
+        <td><a target="_blank" href="{{path('post_details',{'post':post.id})}}">go to post</a></td>
          {% if is_granted('ROLE_ADMIN') %}
         <td>
             <form action="#" method="POST">

@@ -98,7 +98,7 @@ class AdminController extends AbstractController
         }
         else
         {
-            $posts = $this->getUser()->getLikedVideos();
+            $posts = $this->getUser()->getLikedPosts();
         }
         
         return $this->render('admin/posts.html.twig',[
