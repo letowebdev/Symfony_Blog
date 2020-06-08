@@ -12,23 +12,10 @@
 
                     <div class="btn-group">
 
-                                    <i class="fa fa-thumbs-up text-info ml-2"><small class="text-info ml-1 ">(23)</small></i>&nbsp;
-                                    <i class="fa fa-thumbs-down text-danger"><small class="text-danger  ml-1 mr-2">(9)</small></i>
+                                    <i class="fa fa-thumbs-up text-info ml-2"><small class="text-info ml-1 number-of-likes-{{post.id}}">({{post.usersThatLike.count}})</small></i>&nbsp;
+                                    <i class="fa fa-thumbs-down text-danger"><small class="text-danger  ml-1 mr-2 number-of-dislikes-{{post.id}}">({{post.usersThatDontLike.count}})</small></i>
                                     {% if is_granted('IS_AUTHENTICATED_REMEMBERED')  %}
-                                    <button data-toggle="tooltip" data-placement="top" title="Click to like the post"
-                                        type="button" class="btn btn-primary btn-outline-info btn-sm ml-1">
-                                        <i class="fa fa-thumbs-up"></i>
-                                    </button>
-                                    <!-- <button data-toggle="tooltip" data-placement="top" title="You like the post. Click to unlike" type="button" class="btn btn-primary btn-outline-success btn-sm mr-2">
-                                    <i class="fa fa-thumbs-up"></i>
-                                    </button> -->
-                                    <button data-toggle="tooltip" data-placement="top" title="Click to dislike the post"
-                                        type="button" class="btn btn-primary btn-outline-danger btn-sm ml-1 mr-1">
-                                        <i class="fa fa-thumbs-down"></i>
-                                    </button>
-                                    <!-- <button data-toggle="tooltip" data-placement="top" title="You don't like the post. Click to undo" type="button" class="btn btn-primary btn-outline-danger btn-sm mr-2">
-                                    <i class="fa fa-thumbs-down"></i>
-                                    </button> -->
+                                     {{ include('front/includes/_likes.html.twig', {'post' : post}) }}
                                     {% endif  %}
                                     <a class="ml-1" href="{{path('post_details',{'post':post.id})}}#post_comments">Comments ({{post.comments.count}})</a>
                                 </div>
