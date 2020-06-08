@@ -76,7 +76,7 @@ class AdminController extends AbstractController
         ]);
     }
 
-        /**
+    /**
      * @Route("/su/delete-category/{id}", name="delete_category")
      */
     public function deleteCategory(Category $category)
