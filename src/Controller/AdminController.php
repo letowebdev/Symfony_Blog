@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Post;
 use App\Entity\Category;
 use App\Form\CategoryType;
 use App\Utils\CategoryTreeAdminList;
@@ -91,7 +92,18 @@ class AdminController extends AbstractController
      */
     public function posts()
     {
-        return $this->render('admin/posts.html.twig');
+        if ($this->isGranted('ROLE_ADMIN')) 
+        {
+            $posts = $this->getDoctrine()->getRepository(Post::class)->findAll();
+        }
+        else
+        {
+            $posts = $this->getUser()->getLikedVideos();
+        }
+        
+        return $this->render('admin/posts.html.twig',[
+        'posts'=>$posts
+        ]);
     }
 
     /**
