@@ -20,7 +20,8 @@ class MainController extends AbstractController {
      */
     public function index(Request $request)
     {
-        $form = $this->createForm(UserType::class);
+        $user = $this->getUser();
+        $form = $this->createForm(UserType::class, $user);
         $form->handleRequest($request);
         $is_invalid = null;
         if ($form->isSubmitted() && $form->isValid())
