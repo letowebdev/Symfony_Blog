@@ -67,5 +67,8 @@
         <script src="{{asset('assets/js/jquery.js')}}"></script>
         <script src="{{asset('assets/js/popper.js')}}"></script>
         <script src="{{asset('assets/js/bootstrap.js')}}"></script>
+        {% if app.user %}
+        <script src="{{asset('assets/js/likes.js')}}"></script>
+        {% endif %}
     </body>
 </html>
