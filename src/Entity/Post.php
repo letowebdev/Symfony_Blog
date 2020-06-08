@@ -7,6 +7,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\ORM\Mapping\Index as index;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass=PostRepository::class)
@@ -14,6 +15,8 @@ use Doctrine\ORM\Mapping\Index as index;
  */
 class Post
 {
+    public const uploadFolder = '/uploads/images/';
+
     /**
      * @ORM\Id()
      * @ORM\GeneratedValue()
@@ -32,7 +35,7 @@ class Post
     private $body;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
+     * @ORM\Column(type="string", length=255, nullable=false)
      */
     private $photo;
 
@@ -45,6 +48,13 @@ class Post
      * @ORM\Column(type="datetime", nullable=true)
      */
     private $updated_at;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\User")
+     * @ORM\JoinColumn(name="user_id", referencedColumnName="id", onDelete="CASCADE")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $user;
 
     /**
      * @ORM\ManyToOne(targetEntity=Category::class, inversedBy="posts")
@@ -68,6 +78,12 @@ class Post
      * @ORM\JoinTable(name="dislikes")
      */
     private $usersThatDontLike;
+
+  /** 
+    * @Assert\NotBlank(message="Please, upload a post image!")
+    * @Assert\File(mimeTypes={ "image/*" }) 
+    */
+    private $uploaded_image;
 
     public function __construct()
     {
@@ -138,6 +154,18 @@ class Post
     public function setUpdatedAt(?\DateTimeInterface $updated_at): self
     {
         $this->updated_at = $updated_at;
+
+        return $this;
+    }
+
+    public function getUser(): ?User
+    {
+        return $this->user;
+    }
+
+    public function setUser(?User $user): self
+    {
+        $this->user = $user;
 
         return $this;
     }
@@ -233,6 +261,18 @@ class Post
         if ($this->usersThatDontLike->contains($usersThatDontLike)) {
             $this->usersThatDontLike->removeElement($usersThatDontLike);
         }
+
+        return $this;
+    }
+
+    public function getUploadedImage()
+    {
+        return $this->uploaded_image;
+    }
+
+    public function setUploadedImage($uploaded_image): self
+    {
+        $this->uploaded_image = $uploaded_image;
 
         return $this;
     }

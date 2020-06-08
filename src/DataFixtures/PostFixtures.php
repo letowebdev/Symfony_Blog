@@ -13,12 +13,16 @@ class PostFixtures extends Fixture
 {
     public function load(ObjectManager $manager)
     {
-        foreach($this->PostData() as [$title, $body, $photo, $category_id])
+        foreach($this->PostData() as [$title, $user,  $body, $photo, $category_id])
         {
             
             $category = $manager->getRepository(Category::class)->find($category_id);
+            $user = $manager->getRepository(User::class)->find($user);
+            
             $post = new Post();
+
             $post->setTitle($title);
+            $post->setUser($user);
             $post->setBody($body);
             $post->setPhoto($photo);
             $post->setRelation($category);
@@ -67,31 +71,31 @@ class PostFixtures extends Fixture
     {
         return [
 
-            ['Post 1','This is some content...', 'http://icons.iconarchive.com/icons/paomedia/small-n-flat/1024/post-it-icon.png', 1],
-            ['Post 2','This is some content...', 'http://icons.iconarchive.com/icons/paomedia/small-n-flat/1024/post-it-icon.png', 2],
-            ['Post 3','This is some content...', 'http://icons.iconarchive.com/icons/paomedia/small-n-flat/1024/post-it-icon.png', 3],
-            ['Post 4','This is some content...', 'http://icons.iconarchive.com/icons/paomedia/small-n-flat/1024/post-it-icon.png', 4],
-            ['Post 5','This is some content...', 'http://icons.iconarchive.com/icons/paomedia/small-n-flat/1024/post-it-icon.png', 5],
-            ['Post 6','This is some content...', 'http://icons.iconarchive.com/icons/paomedia/small-n-flat/1024/post-it-icon.png', 4],
-            ['Post 7','This is some content...', 'http://icons.iconarchive.com/icons/paomedia/small-n-flat/1024/post-it-icon.png', 4],
-            ['Post 8','This is some content...', 'http://icons.iconarchive.com/icons/paomedia/small-n-flat/1024/post-it-icon.png', 6],
-            ['Post 9','This is some content...', 'http://icons.iconarchive.com/icons/paomedia/small-n-flat/1024/post-it-icon.png', 4],
+            ['Post 1', 1, 'This is some content...', 'http://icons.iconarchive.com/icons/paomedia/small-n-flat/1024/post-it-icon.png', 1],
+            ['Post 2', 1, 'This is some content...', 'http://icons.iconarchive.com/icons/paomedia/small-n-flat/1024/post-it-icon.png', 2],
+            ['Post 3', 1, 'This is some content...', 'http://icons.iconarchive.com/icons/paomedia/small-n-flat/1024/post-it-icon.png', 3],
+            ['Post 4', 1, 'This is some content...', 'http://icons.iconarchive.com/icons/paomedia/small-n-flat/1024/post-it-icon.png', 4],
+            ['Post 5', 1, 'This is some content...', 'http://icons.iconarchive.com/icons/paomedia/small-n-flat/1024/post-it-icon.png', 5],
+            ['Post 6', 2, 'This is some content...', 'http://icons.iconarchive.com/icons/paomedia/small-n-flat/1024/post-it-icon.png', 4],
+            ['Post 7', 2, 'This is some content...', 'http://icons.iconarchive.com/icons/paomedia/small-n-flat/1024/post-it-icon.png', 4],
+            ['Post 8', 2, 'This is some content...', 'http://icons.iconarchive.com/icons/paomedia/small-n-flat/1024/post-it-icon.png', 6],
+            ['Post 9', 2, 'This is some content...', 'http://icons.iconarchive.com/icons/paomedia/small-n-flat/1024/post-it-icon.png', 4],
 
-            ['Post 1','This is some content...', 'http://icons.iconarchive.com/icons/paomedia/small-n-flat/1024/post-it-icon.png', 17],
-            ['Post 2','This is some content...', 'http://icons.iconarchive.com/icons/paomedia/small-n-flat/1024/post-it-icon.png', 17],
-            ['Family 3','This is some content...', 'http://icons.iconarchive.com/icons/paomedia/small-n-flat/1024/post-it-icon.png', 17],
+            ['Post 1', 3, 'This is some content...', 'http://icons.iconarchive.com/icons/paomedia/small-n-flat/1024/post-it-icon.png', 17],
+            ['Post 2', 3, 'This is some content...', 'http://icons.iconarchive.com/icons/paomedia/small-n-flat/1024/post-it-icon.png', 17],
+            ['Family 3', 3, 'This is some content...', 'http://icons.iconarchive.com/icons/paomedia/small-n-flat/1024/post-it-icon.png', 17],
 
-            ['Post 1','This is some content...','http://icons.iconarchive.com/icons/paomedia/small-n-flat/1024/post-it-icon.png',  19],
-            ['Post 2','This is some content...','http://icons.iconarchive.com/icons/paomedia/small-n-flat/1024/post-it-icon.png',  19],
+            ['Post 1', 4, 'This is some content...','http://icons.iconarchive.com/icons/paomedia/small-n-flat/1024/post-it-icon.png',  19],
+            ['Post 2', 4, 'This is some content...','http://icons.iconarchive.com/icons/paomedia/small-n-flat/1024/post-it-icon.png',  19],
 
-            ['Post 1','This is some content...','http://icons.iconarchive.com/icons/paomedia/small-n-flat/1024/post-it-icon.png',  20],
+            ['Post 1', 1, 'This is some content...','http://icons.iconarchive.com/icons/paomedia/small-n-flat/1024/post-it-icon.png',  20],
 
-            ['Post  1','This is some content...','http://icons.iconarchive.com/icons/paomedia/small-n-flat/1024/post-it-icon.png',  2],
-            ['Post  2','This is some content...','http://icons.iconarchive.com/icons/paomedia/small-n-flat/1024/post-it-icon.png',  2],
-            ['Post  3','This is some content...','http://icons.iconarchive.com/icons/paomedia/small-n-flat/1024/post-it-icon.png',  2],
-            ['Post  4','This is some content...','http://icons.iconarchive.com/icons/paomedia/small-n-flat/1024/post-it-icon.png',  2],
-            ['Post  5','This is some content...','http://icons.iconarchive.com/icons/paomedia/small-n-flat/1024/post-it-icon.png',  2],
-            ['Post  6','This is some content...','http://icons.iconarchive.com/icons/paomedia/small-n-flat/1024/post-it-icon.png',  2]
+            ['Post  1', 4, 'This is some content...','http://icons.iconarchive.com/icons/paomedia/small-n-flat/1024/post-it-icon.png',  2],
+            ['Post  2', 4, 'This is some content...','http://icons.iconarchive.com/icons/paomedia/small-n-flat/1024/post-it-icon.png',  2],
+            ['Post  3', 4, 'This is some content...','http://icons.iconarchive.com/icons/paomedia/small-n-flat/1024/post-it-icon.png',  2],
+            ['Post  4', 4, 'This is some content...','http://icons.iconarchive.com/icons/paomedia/small-n-flat/1024/post-it-icon.png',  2],
+            ['Post  5', 4, 'This is some content...','http://icons.iconarchive.com/icons/paomedia/small-n-flat/1024/post-it-icon.png',  2],
+            ['Post  6', 4, 'This is some content...','http://icons.iconarchive.com/icons/paomedia/small-n-flat/1024/post-it-icon.png',  2]
 
         ];
     }
