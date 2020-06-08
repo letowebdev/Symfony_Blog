@@ -37,11 +37,12 @@ class PostRepository extends ServiceEntityRepository
         else
         {
             $dbquery =  $this->createQueryBuilder('p')
-            ->addSelect('COUNT(l) AS HIDDEN likes') //
+            ->addSelect('COUNT(l) AS HIDDEN likes', 'c') //
             ->leftJoin('p.usersThatLike', 'l')
+            ->leftJoin('p.comments', 'c')
             ->andWhere('p.category IN (:val)')
             ->setParameter('val', $value)
-            ->groupBy('p')
+            ->groupBy('p', 'c')
             ->orderBy('likes', 'DESC');
         }
 
@@ -79,9 +80,10 @@ class PostRepository extends ServiceEntityRepository
         else
         {
             $dbquery =  $querybuilder
-            ->addSelect('COUNT(l) AS HIDDEN likes') // bez hidden zwróci array: count + entity
+            ->addSelect('COUNT(l) AS HIDDEN likes', 'c')
             ->leftJoin('p.usersThatLike', 'l')
-            ->groupBy('p')
+            ->leftJoin('p.comments', 'c')
+            ->groupBy('p', 'c')
             ->orderBy('likes', 'DESC')
              ->getQuery();
         }
@@ -103,7 +105,11 @@ class PostRepository extends ServiceEntityRepository
 
     private function prepareQuery(string $query): array
     {
-        return explode(' ',$query);
+        $terms = array_unique(explode(' ', $query));
+
+        return array_filter($terms, function ($term) {
+            return 2 <= mb_strlen($term);
+        });
     }
 
     // /**
