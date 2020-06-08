@@ -6,11 +6,11 @@
 {% set noActionYet = 'noActionYet' %}
 {% endif %}
 
-<button data-toggle="tooltip" data-placement="top" title="Click to like the post" type="button" class="btn btn-primary btn-outline-success btn-sm ml-1 post-id-{{post.id}}  click-to-like-post {{noActionYet|default(null)}}">
+<button data-toggle="tooltip" data-placement="top" title="Click to like the post" type="button" class="btn btn-primary btn-outline-info btn-sm ml-1 post-id-{{post.id}}  click-to-like-post {{noActionYet|default(null)}}">
     <i  href="{{path('like_post',{'post':post.id})}}" class="fa fa-thumbs-up toogle-likes"></i>
 </button>
 
-<button data-toggle="tooltip" data-placement="top" title="You like the post. Click to unlike" type="button" class="btn btn-primary btn-outline-success btn-sm mr-2 ml-1 likes-post-id-{{post.id}} click-to-unlike-post {{userLikesPost|default(null)}}">
+<button data-toggle="tooltip" data-placement="top" title="You like the post. Click to unlike" type="button" class="btn btn-primary btn-outline-info btn-sm mr-2 ml-1 likes-post-id-{{post.id}} click-to-unlike-post {{userLikesPost|default(null)}}">
     <i href="{{path('undo_like_post',{'post':post.id})}}" class="fa fa-thumbs-up toogle-likes"></i>
 </button>
 
