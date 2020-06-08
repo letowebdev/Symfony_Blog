@@ -12,7 +12,6 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use App\Controller\Traits\Likes;
 
-
 class FrontController extends AbstractController
 {
     use Likes;
