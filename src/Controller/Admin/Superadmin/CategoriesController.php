@@ -10,10 +10,13 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
+/**
+ * @Route("/admin/su")
+ */
 class CategoriesController extends AbstractController {
 
     /**
-     * @Route("/su/categories", name="categories", methods={"GET","POST"})
+     * @Route("/categories", name="categories", methods={"GET","POST"})
      */
     public function categories(CategoryTreeAdminList $categories, Request $request)
     {
@@ -40,7 +43,7 @@ class CategoriesController extends AbstractController {
     }
 
      /**
-     * @Route("/su/edit-category/{id}", name="edit_category", methods={"GET","POST"})
+     * @Route("/edit-category/{id}", name="edit_category", methods={"GET","POST"})
      */
     public function editCategory(Category $category, Request $request)
     {
@@ -64,7 +67,7 @@ class CategoriesController extends AbstractController {
     }
 
     /**
-     * @Route("/su/delete-category/{id}", name="delete_category")
+     * @Route("/delete-category/{id}", name="delete_category")
      */
     public function deleteCategory(Category $category)
     {

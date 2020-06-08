@@ -11,7 +11,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class SuperAdminController extends AbstractController {
 
     /**
-     * @Route("/su/upload-post", name="upload_post")
+     * @Route("/upload-post", name="upload_post")
      */
     public function uploadPost()
     {
@@ -19,7 +19,7 @@ class SuperAdminController extends AbstractController {
     }
 
     /**
-     * @Route("/su/users", name="users")
+     * @Route("/users", name="users")
      */
     public function users()
     {
