@@ -21,15 +21,32 @@ class PostRepository extends ServiceEntityRepository
         $this->paginator = $paginator;
     }
 
-    public function findByChildIds($value, $page, $sort_method)
+    public function findByChildIds(array $value, int $page, ?string $sort_method)
     {
-        $sort_method = $sort_method != 'rating' ? $sort_method : 'ASC'; // tmp
+        if($sort_method != 'rating')
+        {
+        $dbquery = $this->createQueryBuilder('p')           
+                    ->andWhere('p.category IN (:val)')
+                    ->leftJoin('p.comments', 'c')
+                    ->leftJoin('p.usersThatLike', 'l')
+                    ->leftJoin('p.usersThatDontLike', 'd')
+                    ->addSelect('c','l','d') //Eager loading to reduce queries
+                    ->setParameter('val', $value)
+                    ->orderBy('p.title', $sort_method);
+        }
+        else
+        {
+            $dbquery =  $this->createQueryBuilder('p')
+            ->addSelect('COUNT(l) AS HIDDEN likes') //
+            ->leftJoin('p.usersThatLike', 'l')
+            ->andWhere('p.category IN (:val)')
+            ->setParameter('val', $value)
+            ->groupBy('p')
+            ->orderBy('likes', 'DESC');
+        }
 
-        $dbquery =  $this->createQueryBuilder('p')
-        ->andWhere('p.category IN (:val)')
-        ->setParameter('val', $value)
-        ->orderBy('p.title', $sort_method)
-        ->getQuery();
+        $dbquery->getQuery();
+        
 
         $pagination = $this->paginator->paginate($dbquery, $page, 3);
         return $pagination;
@@ -37,7 +54,7 @@ class PostRepository extends ServiceEntityRepository
 
     public function findByTitle(string $query, int $page, ?string $sort_method)
     {
-        $sort_method = $sort_method != 'rating' ? $sort_method : 'ASC'; // tmp
+        // $sort_method = $sort_method != 'rating' ? $sort_method : 'ASC'; // tmp
 
         $querybuilder = $this->createQueryBuilder('p');
         $searchTerms = $this->prepareQuery($query);
@@ -49,9 +66,25 @@ class PostRepository extends ServiceEntityRepository
                 ->setParameter('t_'.$key, '%'.trim($term).'%'); 
         }
 
-        $dbquery =  $querybuilder
-            ->orderBy('p.title', $sort_method)
-            ->getQuery();
+        if($sort_method != 'rating')
+        {
+            $dbquery =  $querybuilder
+                ->orderBy('p.title', $sort_method)
+                ->leftJoin('p.comments', 'c')
+                ->leftJoin('p.usersThatLike', 'l')
+                ->leftJoin('p.usersThatDontLike', 'd')
+                ->addSelect('c','l','d')
+                ->getQuery();
+        }
+        else
+        {
+            $dbquery =  $querybuilder
+            ->addSelect('COUNT(l) AS HIDDEN likes') // bez hidden zwróci array: count + entity
+            ->leftJoin('p.usersThatLike', 'l')
+            ->groupBy('p')
+            ->orderBy('likes', 'DESC')
+             ->getQuery();
+        }
 
         return $this->paginator->paginate($dbquery, $page, 3);
     }
