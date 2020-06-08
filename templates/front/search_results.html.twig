@@ -1,6 +1,16 @@
 {% extends "base.html.twig" %}
 
 {% block main %}
+
+{% block stylesheets %}
+{{parent()}}
+{% if app.user %}
+<link rel="stylesheet" href="{{asset('assets/css/likes.css')}}">
+{% endif %}
+
+{% endblock %}
+
+
 <div class="container">
 	<div class="jumbotron mt-4">
 	 	{% if posts %}
@@ -16,9 +26,7 @@
 	{% endif %}
 </div>
 
-
-
-
-
-
+{% block javascripts %}
+{{parent()}}
+<script src="{{asset ('assets/js/likes.js')}}"></script>
 {% endblock %}

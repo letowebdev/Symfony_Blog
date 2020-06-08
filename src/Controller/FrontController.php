@@ -177,6 +177,55 @@ class FrontController extends AbstractController
         $this->get('session')->set('_security_main',serialize($token));
     }
 
+    /**
+     * @Route("/post-list/{post}/like", name="like_post", methods={"POST"})
+     * @Route("/post-list/{post}/dislike", name="dislike_post", methods={"POST"})
+     * @Route("/post-list/{post}/unlike", name="undo_like_post", methods={"POST"})
+     * @Route("/post-list/{post}/undodislike", name="undo_dislike_post", methods={"POST"})
+     */
+    public function toggleLikesAjax(Post $post, Request $request)
+    {
+        
+        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_REMEMBERED');
+
+        switch($request->get('_route'))
+        {
+            case 'like_post':
+            $result = $this->likePost($post);
+            break;
+            
+            case 'dislike_post':
+            $result = $this->dislikePost($post);
+            break;
+
+            case 'undo_like_post':
+            $result = $this->undoLikePost($post);
+            break;
+
+            case 'undo_dislike_post':
+            $result = $this->undoDislikePost($post);
+            break;
+        }
+
+        return $this->json(['action' => $result,'id'=>$post->getId()]);
+    }
+
+    private function likePost($post)
+    {  
+        return 'liked';
+    }
+    private function dislikePost($post)
+    {
+        return 'disliked';
+    }
+    private function undoLikePost($post)
+    {  
+        return 'undo liked';
+    }
+    private function undoDislikePost($post)
+    {   
+        return 'undo disliked';
+    }
 
 
 

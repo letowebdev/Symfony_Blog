@@ -2,44 +2,55 @@
 
 {% block main %}
 
+{% block stylesheets %}
+{{parent()}}
+{% if app.user %}
+<link rel="stylesheet" href="{{asset('assets/css/likes.css')}}">
+{% endif %}
+{% endblock %}
 
 	<div class="container">
 
 		<div class="row mt-4">
 
 			{{ include('front/includes/_posts.html.twig', {'posts' : posts}) }}
-             
 
 
-            <div class="col-md-4">
-                <div class="card">
-                    <div class="card-header">
-                        <h4>Categories</h4>
-                    </div>
-                    <div class="card-body">
-                        <div class="form-group ">
-                            <h3>Posts Main Categories</h3>
-                            <div class=" d-inline ">
-                            {{render(controller("App\\Controller\\FrontController::mainCategories"))}}
-                           {{ include('front/includes/_sort.html.twig') }}
-                            </div>
-                        </div>
-                        <h3>{{subcategories.currentCategoryName}} Category</h3>
-                        <hr>
-                            <li><a href="{{path('post_list',{'categoryname':subcategories.mainParentName|slugify|lower, 'id':subcategories.mainParentId})}}">{{subcategories.mainParentName}}</a></li>
-                            {{subcategories.categorylist| raw}}
-                            {# <li class="list-group-item">Vestibulum at eros</li> #}
-                      
-                    </div>
-                </div>
-            </div>
+			<div class="col-md-4">
+				<div class="card">
+					<div class="card-header">
+						<h4>Categories</h4>
+					</div>
+					<div class="card-body">
+						<div class="form-group ">
+							<h3>Posts Main Categories</h3>
+							<div class=" d-inline ">
+								{{render(controller("App\\Controller\\FrontController::mainCategories"))}}
+								{{ include('front/includes/_sort.html.twig') }}
+							</div>
+						</div>
+						<h3>{{subcategories.currentCategoryName}}
+							Category</h3>
+						<hr>
+						<li>
+							<a href="{{path('post_list',{'categoryname':subcategories.mainParentName|slugify|lower, 'id':subcategories.mainParentId})}}">{{subcategories.mainParentName}}</a>
+						</li>
+						{{subcategories.categorylist| raw}}
+						{# <li class="list-group-item">Vestibulum at eros</li> #}
 
-                
+					</div>
+				</div>
+			</div>
 
-
-
-
-            </div>
 
 		</div>
-	{% endblock %}
+
+	</div>
+
+{% block javascripts %}
+{{parent()}}
+<script src="{{asset ('assets/js/likes.js')}}"></script>
+{% endblock %}
+
+{% endblock %}
+
