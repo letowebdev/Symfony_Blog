@@ -1,7 +1,7 @@
 <?php
 namespace App\Tests;
 
-trait RollUser {
+trait RoleUser {
 
     public function setUp()
     {

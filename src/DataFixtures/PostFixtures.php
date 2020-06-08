@@ -108,8 +108,8 @@ class PostFixtures extends Fixture
                 [11,4],
     
                 [1,1],
-                [1,2],
-                [1,3],
+                [1,4],
+                [3,4],
     
                 [2,1],
                 [2,2]
