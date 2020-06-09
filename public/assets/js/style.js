@@ -39,13 +39,18 @@
         $('.custom-file-label').html(fileName);
     });
 
-    function delete_post(e,post_id)
+    // function delete_post(e,post_id)
+    // {
+    //     e.preventDefault();
+    //     if(confirm('Are you sure?')) 
+    //     {
+    //         console.log(id);
+    //         // delete post
+    //         // window.location.href = 'clear database record with Symfony';
+    //     }
+    // }
+
+    function delete_post(e)
     {
-        e.preventDefault();
-        if(confirm('Are you sure?')) 
-        {
-            console.log(id);
-            // delete post
-            // window.location.href = 'clear database record with Symfony';
-        }
+        confirm('Are you sure?')
     }

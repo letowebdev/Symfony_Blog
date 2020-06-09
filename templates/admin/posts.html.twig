@@ -42,7 +42,7 @@
                 </select>
             </form>
         </td>
-        <td><a href="#" onclick="delete_post(event,2);">X</a></td>
+        <td><a href="{{path('delete_post',{'post':post.id})}}" onclick="delete_post(event);"><i class="fa fa-trash"></i></a></td>
         {% endif %}
       </tr>
         {% endfor %}
