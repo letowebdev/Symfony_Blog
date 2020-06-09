@@ -2,6 +2,13 @@
 
 {% block main %}
 
+{% block stylesheets %}
+{{parent()}}
+{% if app.user %}
+<link rel="stylesheet" href="{{asset('assets/css/likes.css')}}">
+{% endif %}
+{% endblock %}
+
 <div class="container">
 	<div class="row mt-4">
 
@@ -14,7 +21,26 @@
 					<img src="{{post.photo}}" class="img-fluid mx-auto d-block" alt="Responsive image">
 					<p class="p-2">{{post.body}}</p>
 				</div>
-                <span class="card-header">Posted ON: {{post.createdAt().format('Y-m-d')}}
+
+
+
+                
+                <span class="card-header bg-dark border-info">Posted ON: {{post.createdAt().format('Y-m-d')}}
+
+                    <div class="btn-group">
+                            <div>
+                                <span class="text-info mr-2 ml-2"> Likes: <small class="text-info ml-1 number-of-likes-{{post.id}}"> ({{post.usersThatLike.count}})</small></span>
+                              <span class="text-danger mr-2">  Dislikes: <small class="text-danger  ml-1 mr-2 number-of-dislikes-{{post.id}}">  ({{post.usersThatDontLike.count}})</small></span>
+                            </div>
+                            {% if is_granted('IS_AUTHENTICATED_REMEMBERED')  %}
+                                {{ include('front/includes/_likes.html.twig', {'post' : post}) }}
+                            {% endif  %}
+                            <a class="ml-1" href="{{path('post_details',{'post':post.id})}}#post_comments">Comments ({{post.comments.count}})</a>
+                        </div>
+                    </span>
+
+
+
 			</div>
 		</div>
 	</div>
