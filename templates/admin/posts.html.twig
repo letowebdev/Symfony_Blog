@@ -31,15 +31,20 @@
         <td><a target="_blank" href="{{path('post_details',{'post':post.id})}}">go to post</a></td>
          {% if is_granted('ROLE_ADMIN') %}
         <td>
-            <form action="#" method="POST">
-                <select onchange="this.form.submit();">
-                <option selected>Parent...</option>
-                <option value="1">Funny</option>
-                <option value="1">--For kids</option>
-                <option value="1">----For adults</option>
-                <option value="2">Scary</option>
-                <option value="3">Motivating</option>
-                </select>
+            <form action="{{path('update_post_category',{'post':post.id})}}" method="POST">
+            <select name="post_category" onchange="this.form.submit();">
+
+            {% for category in categories.categorylist %}
+                {% if post.category is not null and post.category.id == category.id  %}
+                <option selected value="{{category.id}}">{{category.name}}</option>
+                {% else %}
+                <option value="{{category.id}}">{{category.name}}</option>
+                {% endif %}
+            {% endfor %}
+            {% if post.category is null %}
+            <option selected value="0">No category</option>
+            {% endif %}
+            </select>
             </form>
         </td>
         <td><a href="{{path('delete_post',{'post':post.id, 'path':post.photo})}}" onclick="delete_post(event);"><i class="fa fa-trash"></i></a></td>

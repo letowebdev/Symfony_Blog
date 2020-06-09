@@ -25,7 +25,7 @@ class PostFixtures extends Fixture
             $post->setUser($user);
             $post->setBody($body);
             $post->setPhoto($photo);
-            $post->setRelation($category);
+            $post->setCatgory($category);
             $post->setCreatedAt(new \DateTime());
             $manager->persist($post);
         }

@@ -72,31 +72,29 @@ class MainController extends AbstractController {
     /**
      * @Route("/posts", name="posts")
      */
-    public function posts()
+    public function posts(CategoryTreeAdminOptionList $categories)
     {
+
         if ($this->isGranted('ROLE_ADMIN')) 
         {
-            $posts = $this->getDoctrine()->getRepository(Post::class)->findAll();
+
+            $categories->getCategoryList($categories->buildTree());
+            $posts = $this->getDoctrine()->getRepository(Post::class)->findBy([],['title'=>'ASC']);
+            
         }
         else
         {
+            $categories = null;
             $posts = $this->getUser()->getLikedPosts();
         }
-        
+
         return $this->render('admin/posts.html.twig',[
-        'posts'=>$posts
+            'posts'=>$posts,
+            'categories'=>$categories
         ]);
     }
 
-    public function getAllCategories(CategoryTreeAdminOptionList $categories, $editedCategory = null)
-    {
-        $this->denyAccessUnlessGranted('ROLE_ADMIN');
-        $categories->getCategoryList($categories->buildTree());
-        return $this->render('admin/_all_categories.html.twig',[
-            'categories' => $categories,
-            'editedCategory' => $editedCategory
-        ]);
-    }
+   
 
 
 }

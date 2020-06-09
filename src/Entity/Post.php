@@ -172,12 +172,12 @@ class Post
         return $this;
     }
 
-    public function getRelation(): ?Category
+    public function getCatgory(): ?Category
     {
         return $this->category;
     }
 
-    public function setRelation(?Category $category): self
+    public function setCatgory(?Category $category): self
     {
         $this->category = $category;
 

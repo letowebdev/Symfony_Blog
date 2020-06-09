@@ -5,6 +5,7 @@ namespace App\Controller\Admin\Superadmin;
 use App\Entity\Post;
 use App\Entity\User;
 use App\Form\PostType;
+use App\Entity\Category;
 use App\Utils\Interfaces\UploaderInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
@@ -83,6 +84,24 @@ class SuperAdminController extends AbstractController {
         return $this->redirectToRoute('posts');
 
     }
+
+    /**
+     * @Route("/update-post-category/{post}", methods={"POST"}, name="update_post_category")
+    */
+    public function updatePostCategory(Request $request, Post $post)
+     {
+
+        $em = $this->getDoctrine()->getManager();
+
+        $category = $this->getDoctrine()->getRepository(Category::class)->find($request->request->get('post_category'));
+
+        $post->setCategory($category);
+
+        $em->persist($post);
+        $em->flush();
+ 
+        return $this->redirectToRoute('posts');
+     }
 
     /**
      * @Route("/users", name="users")
