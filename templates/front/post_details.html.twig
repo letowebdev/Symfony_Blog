@@ -11,7 +11,7 @@
 					<h4>{{post.title}}</h4>
 				</div>
 				<div class="card-body">
-					<img src="{{asset ('https://scx2.b-cdn.net/gfx/news/hires/2019/2-nature.jpg')}}" class="img-fluid" alt="Responsive image">
+					<img src="{{post.photo}}" class="img-fluid mx-auto d-block" alt="Responsive image">
 					<p class="p-2">{{post.body}}</p>
 				</div>
                 <span class="card-header">Posted ON: {{post.createdAt().format('Y-m-d')}}

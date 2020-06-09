@@ -21,8 +21,8 @@ class LocalUploader implements UploaderInterface {
   
     public function upload($file)
     {
-        $video_number = random_int(1,10000000);
-        $fileName = $video_number.'.'.$file->guessExtension();
+        $image_number = random_int(1,10000000); // works only in php7
+        $fileName = $image_number.'.'.$file->guessExtension();
          
         try {
             $file->move($this->getTargetDirectory(), $fileName);

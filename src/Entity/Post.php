@@ -81,7 +81,7 @@ class Post
 
   /** 
     * @Assert\NotBlank(message="Please, upload a post image!")
-    * @Assert\File(mimeTypes={ "image/*" }) 
+    * @Assert\File(mimeTypes={ "image/*" })
     */
     private $uploaded_image;
 

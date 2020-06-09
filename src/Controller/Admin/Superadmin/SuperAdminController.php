@@ -5,6 +5,7 @@ namespace App\Controller\Admin\Superadmin;
 use App\Entity\Post;
 use App\Entity\User;
 use App\Form\PostType;
+use App\Utils\Interfaces\UploaderInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -17,7 +18,7 @@ class SuperAdminController extends AbstractController {
     /**
      * @Route("/create-post", name="create_post")
      */
-    public function createPost(Request $request)
+    public function createPost(Request $request, UploaderInterface $fileUploader)
     {
         $post = new Post();
         $form = $this->createForm(PostType::class, $post);
@@ -29,15 +30,16 @@ class SuperAdminController extends AbstractController {
             $em = $this->getDoctrine()->getManager();
 
             $file = $post->getUploadedImage();
-            // $fileName = $fileUploader->upload($file);
-            $fileName = 'to do';
+            $fileName = $fileUploader->upload($file);
+            // $fileName = 'to do';
 
           
 
             $base_path = Post::uploadFolder;
-            $post->setPhoto($base_path.$fileName);
+            $post->setPhoto($base_path.$fileName[0]);
+            $post->setTitle($fileName[1]);
 
-            $post->setBody($request->request->get('post')['title']);
+            $post->setTitle($request->request->get('post')['title']);
             $post->setBody($request->request->get('post')['body']);
             $post->setUser($this->getUser());
             $post->setCreatedAt(new \DateTime());
@@ -51,6 +53,35 @@ class SuperAdminController extends AbstractController {
         return $this->render('admin/create_post.html.twig', [
             'form' => $form->createView()
         ]);
+    }
+
+    /**
+     * @Route("/delete-post/{post}/{path}", name="delete_post", requirements={"path"=".+"})
+     */
+    public function deletePost(Post $post, $path, UploaderInterface $fileUploader)
+    {
+
+        $em = $this->getDoctrine()->getManager();
+        $em->remove($post);
+        $em->flush();
+
+        if( $fileUploader->delete($path) )
+        {
+            $this->addFlash(
+                'success',
+                'The post was deleted.'
+            );
+        }
+        else
+        {
+            $this->addFlash(
+                'danger',
+                'We were not able to delete. Check the post.'
+            );
+        }
+        
+        return $this->redirectToRoute('post');
+
     }
 
     /**
