@@ -25,11 +25,13 @@ class Post
     private $id;
 
     /**
+     * @Assert\NotBlank(message="Please, Enter a title!")
      * @ORM\Column(type="string", length=255)
      */
     private $title;
 
     /**
+     * @Assert\NotBlank(message="Please, write some content!")
      * @ORM\Column(type="text")
      */
     private $body;

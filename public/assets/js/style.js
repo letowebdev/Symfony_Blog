@@ -35,7 +35,7 @@
 
     $('input[type="file"]').change( (e) => {
         let fileName = e.target.files[0].name;
-        console.log(e.target.files[0]);
+        // console.log(e.target.files[0]);
         $('.custom-file-label').html(fileName);
     });
 
