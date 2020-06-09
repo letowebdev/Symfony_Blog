@@ -69,7 +69,7 @@ class SuperAdminController extends AbstractController {
         {
             $this->addFlash(
                 'success',
-                'The post was deleted.'
+                'The post was successfully deleted.'
             );
         }
         else
@@ -80,7 +80,7 @@ class SuperAdminController extends AbstractController {
             );
         }
         
-        return $this->redirectToRoute('post');
+        return $this->redirectToRoute('posts');
 
     }
 

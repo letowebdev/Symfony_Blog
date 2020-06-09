@@ -42,7 +42,7 @@
                 </select>
             </form>
         </td>
-        <td><a href="{{path('delete_post',{'post':post.id})}}" onclick="delete_post(event);"><i class="fa fa-trash"></i></a></td>
+        <td><a href="{{path('delete_post',{'post':post.id, 'path':post.photo})}}" onclick="delete_post(event);"><i class="fa fa-trash"></i></a></td>
         {% endif %}
       </tr>
         {% endfor %}
@@ -52,8 +52,12 @@
 </div>
 {% block javascripts %}
 {{parent()}}
-
-     <script src="{{asset('assets/js/style.js')}}"></script>
+<script>
+    function delete_post(e)
+    {
+        confirm('Are you sure?');
+    }
+</script>
 
 {% endblock %}
 
