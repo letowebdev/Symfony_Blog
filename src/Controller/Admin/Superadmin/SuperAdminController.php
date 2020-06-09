@@ -56,6 +56,47 @@ class SuperAdminController extends AbstractController {
         ]);
     }
 
+        /**
+     * @Route("/edit-post/{post}", name="edit_post", methods={"GET","POST"})
+     */
+    public function editPost(Post $post, Request $request, UploaderInterface $fileUploader)
+    {
+       
+        $post = $this->getDoctrine()->getRepository(Post::class)->find($post);
+        $form = $this->createForm(PostType::class, $post);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid())
+        {
+       
+            $em = $this->getDoctrine()->getManager();
+
+            $file = $post->getUploadedImage();
+            $fileName = $fileUploader->upload($file);
+            // $fileName = 'to do';
+
+          
+
+            $base_path = Post::uploadFolder;
+            $post->setPhoto($base_path.$fileName[0]);
+            $post->setTitle($fileName[1]);
+
+            $post->setTitle($request->request->get('post')['title']);
+            $post->setBody($request->request->get('post')['body']);
+            $post->setUser($this->getUser());
+            $post->setCreatedAt(new \DateTime());
+            // $post->setBody($request->request->get('post')['body']);
+           
+            $em->persist($post);
+            $em->flush();
+
+            return $this->redirectToRoute('posts');
+        }
+        return $this->render('admin/edit_post.html.twig', [
+            'form' => $form->createView()
+        ]);
+    }
+
     /**
      * @Route("/delete-post/{post}/{path}", name="delete_post", requirements={"path"=".+"})
      */

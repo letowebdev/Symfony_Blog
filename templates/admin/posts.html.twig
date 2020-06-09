@@ -20,6 +20,7 @@
         {% if is_granted('ROLE_ADMIN') %}
         <th>Category</th>
         <th>Delete</th>
+        <th>Edit</th>
          {% endif %}
       </tr>
     </thead>
@@ -28,7 +29,7 @@
       <tr>
         <td>{{loop.index}}</td>
         <td>{{post.title}}</td>
-        <td><a target="_blank" href="{{path('post_details',{'post':post.id})}}">go to post</a></td>
+        <td><a target="_blank" href="{{path('post_details',{'post':post.id})}}" class="text-info">go to post</a></td>
          {% if is_granted('ROLE_ADMIN') %}
         <td>
             <form action="{{path('update_post_category',{'post':post.id})}}" method="POST">
@@ -47,7 +48,8 @@
             </select>
         </form>
         </td>
-        <td><a href="{{path('delete_post',{'post':post.id, 'path':post.photo})}}" onclick="delete_post(event);"><i class="fa fa-trash"></i></a></td>
+        <td><a href="{{path('delete_post',{'post':post.id, 'path':post.photo})}}" onclick="delete_post(event);"><i class="fa fa-trash text-danger"></i></a></td>
+        <td><a href="{{path('edit_post',{'post':post.id})}}"><i class="fa fa-edit text-warning"></i></a></td>
         {% endif %}
       </tr>
         {% endfor %}

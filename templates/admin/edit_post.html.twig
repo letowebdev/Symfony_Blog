@@ -1,0 +1,33 @@
+{% extends 'admin/base.html.twig' %}
+{% block mainadmin %}
+
+        <div class="container">
+        <h2>Edit Post</h2>
+           
+
+                {{ form_start(form, {'attr': {'novalidate':'novalidate','class':'needs-validation'}}) }}
+                    <div class="form-group">
+                    {{form_errors(form.title)}}
+                        <div class="mb-2">
+                         
+                             {{ form_widget(form.title) }}
+                            
+                        </div>
+                        {{form_errors(form.uploaded_image)}}
+                        <div class="custom-file mb-2">
+                        
+                            {{ form_widget(form.uploaded_image) }}
+                            <label class="custom-file-label">Choose a picture</label>
+                             
+                    
+                        </div> 
+                          {{form_errors(form.body)}}
+                        <div>
+                        {{ form_widget(form.body) }}
+                    </div>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                {{ form_end(form) }}
+            </div>
+
+{% endblock %}
