@@ -123,7 +123,7 @@ class Category
     {
         if (!$this->posts->contains($post)) {
             $this->posts[] = $post;
-            $post->setCatgory($this);
+            $post->setCategory($this);
         }
 
         return $this;
@@ -135,7 +135,7 @@ class Category
             $this->posts->removeElement($post);
             // set the owning side to null (unless already changed)
             if ($post->getCategory() === $this) {
-                $post->setCatgory(null);
+                $post->setCategory(null);
             }
         }
 

@@ -45,7 +45,7 @@
             <option selected value="0">No category</option>
             {% endif %}
             </select>
-            </form>
+        </form>
         </td>
         <td><a href="{{path('delete_post',{'post':post.id, 'path':post.photo})}}" onclick="delete_post(event);"><i class="fa fa-trash"></i></a></td>
         {% endif %}
