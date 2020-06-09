@@ -1,45 +1,25 @@
 {% extends 'admin/base.html.twig' %}
 {% block mainadmin %}
 
-            
         <div class="container">
         <h2>Create a Post</h2>
-            {# <form method="POST" action="#" enctype="multipart/form-data">
-                <div class="form-group">
-                    <div class="custom-file mb-2">
-                            <input type="file" name="file_data" class="custom-file-input" id="customFile" onchange="console.log(this)">
-                            <label class="custom-file-label bg-dark text-light" for="customFile">Choose file</label>
-                    </div> 
-                    <div class="mb-2">
-                    <input type="text" class="form-control bg-dark text-light" placeholder="Enter your title">
-                    </div>
-                     <div>
-                    <textarea type="text" class="form-control bg-dark text-light" placeholder="Enter your content"></textarea>
-                    </div>
-                    </div>
-                <button type="submit" class="btn btn-secondary">Submit</button>
-            </form> #}
             {{form_errors(form.uploaded_image)}}
 
                 {{ form_start(form) }}
                     <div class="form-group">
                         <div class="mb-2">
-                            {# <input type="text" class="form-control bg-dark text-light" placeholder="Enter your title"> #}
                              {{ form_widget(form.title) }}
                         </div>
-                        <div class="custom-file">
-                            {# <input type="file" name="file_data" class="custom-file-input" id="customFile" onchange="console.log(this)"> #}
+                        <div class="custom-file mb-2">
                             {{ form_widget(form.uploaded_image) }}
                             <label class="custom-file-label">Choose file</label>
                         </div> 
                         <div>
-                    {# <textarea type="text" class="form-control bg-dark text-light" placeholder="Enter your content"></textarea> #}
                         {{ form_widget(form.body) }}
                     </div>
                     </div>
                     <button type="submit" class="btn btn-primary">Submit</button>
                 {{ form_end(form) }}
-
             </div>
 
 {% endblock %}
