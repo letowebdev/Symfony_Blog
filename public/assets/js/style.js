@@ -52,5 +52,5 @@
 
     function delete_post(e)
     {
-        confirm('Are you sure?')
+        confirm('Are you sure?');
     }
