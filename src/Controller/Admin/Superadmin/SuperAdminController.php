@@ -83,8 +83,9 @@ class SuperAdminController extends AbstractController {
 
             $post->setTitle($request->request->get('post')['title']);
             $post->setBody($request->request->get('post')['body']);
+            // $post->sePhoto($request->request->get('post')['uploaded_image']);
             $post->setUser($this->getUser());
-            $post->setCreatedAt(new \DateTime());
+            $post->setUpdatedAt(new \DateTime());
             // $post->setBody($request->request->get('post')['body']);
            
             $em->persist($post);

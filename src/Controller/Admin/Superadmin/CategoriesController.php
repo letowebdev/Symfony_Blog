@@ -102,6 +102,6 @@ class CategoriesController extends AbstractController {
     public function getAllCategories(CategoryTreeAdminOptionList $categories, $editedCategory = null)
     {
         $categories->getCategoryList($categories->buildTree());
-        return $this->render('admin/_all_categories.html.twig',['categories'=>$categories,'editedCategory'=>$editedCategory]);
+        return $this->render('admin/includes/_all_categories.html.twig',['categories'=>$categories,'editedCategory'=>$editedCategory]);
     }
 }

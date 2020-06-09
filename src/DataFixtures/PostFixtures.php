@@ -83,7 +83,7 @@ class PostFixtures extends Fixture
 
             ['Post 1', 3, 'This is some content...', 'http://icons.iconarchive.com/icons/paomedia/small-n-flat/1024/post-it-icon.png', 17],
             ['Post 2', 3, 'This is some content...', 'http://icons.iconarchive.com/icons/paomedia/small-n-flat/1024/post-it-icon.png', 17],
-            ['Family 3', 3, 'This is some content...', 'http://icons.iconarchive.com/icons/paomedia/small-n-flat/1024/post-it-icon.png', 17],
+            ['Post 3', 3, 'This is some content...', 'http://icons.iconarchive.com/icons/paomedia/small-n-flat/1024/post-it-icon.png', 17],
 
             ['Post 1', 4, 'This is some content...','http://icons.iconarchive.com/icons/paomedia/small-n-flat/1024/post-it-icon.png',  19],
             ['Post 2', 4, 'This is some content...','http://icons.iconarchive.com/icons/paomedia/small-n-flat/1024/post-it-icon.png',  19],
