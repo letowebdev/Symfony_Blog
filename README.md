@@ -46,7 +46,7 @@ https://github.com/letowebdev/Symfony_Blog.git
 
 ## Website
 
-https://symfony-unittest-blog.herokuapp.com/
+https://www.youtube.com/watch?v=jE6kFC00aXw
 
 ## Built With
 
