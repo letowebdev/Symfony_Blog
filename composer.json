@@ -32,15 +32,13 @@
         "symfony/twig-pack": "*",
         "symfony/validator": "5.0.*",
         "symfony/web-link": "5.0.*",
-        "symfony/yaml": "5.0.*",
-        "ext-intl" : "*",
-        "ext-pdo_sqlite" : "*"
+        "symfony/yaml": "5.0.*"
     },
     "require-dev": {
         "dama/doctrine-test-bundle": "^6.3",
         "doctrine/doctrine-fixtures-bundle": "^3.3",
         "symfony/debug-pack": "*",
-        "symfony/maker-bundle": "^1.0",
+        "symfony/maker-bundle": "^1.19",
         "symfony/phpunit-bridge": "^5.1",
         "symfony/profiler-pack": "*",
         "symfony/test-pack": "*"
