@@ -46,7 +46,7 @@ https://github.com/letowebdev/Symfony_Blog.git
 
 ## Website
 
-* https://www.youtube.com/watch?v=jE6kFC00aXw
+* https://www.youtube.com/watch?v=eKe_8WAfZX0
 * https://zacheleto.me/Projects/Symfony_Blog/public/
 
 ## Built With
